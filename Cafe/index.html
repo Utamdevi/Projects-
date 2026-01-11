@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header & Navbar -->
+    <header>
+      <div class="container">
+        <nav class="navbar">
+          <a href="#" class="logo">
+            <img
+              src="WhatsApp Image 2026-01-11 at 11.54.01 AM.jpeg"
+              alt="Chai GPT Logo"
+              class="logo-img"
+            />
+            <div>
+              <div class="logo-text">Chai GPT</div>
+              <div class="logo-subtitle">A Cup Full of Comfort</div>
+            </div>
+          </a>
+
+          <div class="nav-container">
+            <ul class="nav-links">
+              <li>
+                <a href="#home"><i class="fas fa-home"></i> Home</a>
+              </li>
+              <li>
+                <a href="#menu"><i class="fas fa-utensils"></i> Menu</a>
+              </li>
+              <li>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+              </li>
+            </ul>
+            <a href="tel:+9203140339545" class="call-btn"
+              ><i class="fas fa-phone"></i> Call Now</a
+            >
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+      <button class="mobile-menu-close" id="mobileMenuClose">
+        <i class="fas fa-times"></i>
+      </button>
+      <ul>
+        <li>
+          <a href="#home"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li>
+          <a href="#fast-food-menu"><i class="fas fa-utensils"></i> Menu</a>
+        </li>
+        <li>
+          <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+        </li>
+      </ul>
+      <a href="tel:+92319546321" class="call-btn"
+        ><i class="fas fa-phone"></i> Call Now</a
+      >
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container">
+        <h1>Sip the Perfect Cup & Savor Delicious Bites</h1>
+        <p>
+          Experience the warmth of our handcrafted teas and the deliciousness of
+          our fast food & pizza menu. Open Monday to Sunday 5 PM to 7 AM.
+        </p>
+        <a href="#fast-food-menu" class="cta-btn">View Full Menu</a>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="section" id="menu">
+      <div class="container">
+        <h2 class="section-title">Our Complete Menu</h2>
+
+        <div class="menu-categories">
+          <button class="category-btn active" data-category="fast-food">
+            Fast Food Menu
+          </button>
+          <button class="category-btn" data-category="pizza">Pizza Menu</button>
+        </div>
+
+        <!-- Fast Food Menu -->
+        <div class="menu-section active" id="fast-food-menu">
+          <h3 class="menu-category-title">CHAI & COFFEE</h3>
+          <div class="menu-items-grid">
+            <div class="menu-item">
+              <div class="menu-item-name">Chai</div>
+              <div class="menu-item-price">Rs. 150</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Batchi Chai</div>
+              <div class="menu-item-price">Rs. 180</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Ghur Chai</div>
+              <div class="menu-item-price">Rs. 200</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Coffee</div>
+              <div class="menu-item-price">Rs. 250</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Colafink</div>
+              <div class="menu-item-price">Rs. 120</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Mineral Water (L)</div>
+              <div class="menu-item-price">Rs. 100</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Mineral Water (S)</div>
+              <div class="menu-item-price">Rs. 60</div>
+            </div>
+          </div>
+
+          <h3 class="menu-category-title">PARATHA'S & DIPS</h3>
+          <div class="menu-items-grid">
+            <div class="menu-item">
+              <div class="menu-item-name">Puri Paratha</div>
+              <div class="menu-item-price">Rs. 120</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Paratha</div>
+              <div class="menu-item-price">Rs. 250</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken, Cheese Paratha</div>
+              <div class="menu-item-price">Rs. 300</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Steak Cheese Paratha</div>
+              <div class="menu-item-price">Rs. 350</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Beef Paratha</div>
+              <div class="menu-item-price">Rs. 280</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Fully Loaded Paratha</div>
+              <div class="menu-item-price">Rs. 400</div>
+            </div>
+          </div>
+
+          <div class="menu-items-grid">
+            <div class="menu-item">
+              <div class="menu-item-name">Chain Dip</div>
+              <div class="menu-item-price">Rs. 50</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Mayo Dip</div>
+              <div class="menu-item-price">Rs. 50</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Spicy Garlic Mayo Dip</div>
+              <div class="menu-item-price">Rs. 70</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Dynamite Dip</div>
+              <div class="menu-item-price">Rs. 70</div>
+            </div>
+          </div>
+
+          <h3 class="menu-category-title">SANDWICHES & FRIES</h3>
+          <div class="menu-items-grid">
+            <div class="menu-item">
+              <div class="menu-item-name">Club Sandwich</div>
+              <div class="menu-item-price">Rs. 350</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Steak Cheese Sandwich</div>
+              <div class="menu-item-price">Rs. 400</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Plain Fries</div>
+              <div class="menu-item-price">Rs. 150</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Masala Fries</div>
+              <div class="menu-item-price">Rs. 180</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Mayo Fries</div>
+              <div class="menu-item-price">Rs. 200</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Mayo Garlic Fries</div>
+              <div class="menu-item-price">Rs. 220</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Dynamite Fries</div>
+              <div class="menu-item-price">Rs. 220</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Zinger Loaded Fries</div>
+              <div class="menu-item-price">Rs. 350</div>
+            </div>
+          </div>
+
+          <h3 class="menu-category-title">CHICKEN BROASTS</h3>
+          <div class="menu-items-grid">
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Breast</div>
+              <div class="menu-item-price">Rs. 300</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Masala Breast</div>
+              <div class="menu-item-price">Rs. 320</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Mayo Breast</div>
+              <div class="menu-item-price">Rs. 330</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Mayo Garlic Breast</div>
+              <div class="menu-item-price">Rs. 350</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Dynamite Breast</div>
+              <div class="menu-item-price">Rs. 350</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Peri Peri Breast</div>
+              <div class="menu-item-price">Rs. 350</div>
+            </div>
+          </div>
+
+          <h3 class="menu-category-title">ZINGER BURGERS</h3>
+          <div class="menu-items-grid">
+            <div class="menu-item">
+              <div class="menu-item-name">Zinger Burger</div>
+              <div class="menu-item-price">Rs. 400</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Dynamite Zinger Burger</div>
+              <div class="menu-item-price">Rs. 450</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Zinger Burger + Cheese</div>
+              <div class="menu-item-price">Rs. 450</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Spicy Garlic Zinger Burger</div>
+              <div class="menu-item-price">Rs. 450</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Jalapena Zinger</div>
+              <div class="menu-item-price">Rs. 470</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Maxican Zinger Burger</div>
+              <div class="menu-item-price">Rs. 480</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Mega Strip Zinger Burger</div>
+              <div class="menu-item-price">Rs. 500</div>
+            </div>
+          </div>
+
+          <h3 class="menu-category-title">BIG BURGERS</h3>
+          <div class="menu-items-grid">
+            <div class="menu-item">
+              <div class="menu-item-name">Love Zinger Burger</div>
+              <div class="menu-item-price">Rs. 550</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Mighty Zinger Burger</div>
+              <div class="menu-item-price">Rs. 600</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">American Cheese Burger</div>
+              <div class="menu-item-price">Rs. 550</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Double Jumbo Zinger</div>
+              <div class="menu-item-price">Rs. 650</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chai GPT Special Burger</div>
+              <div class="menu-item-price">Rs. 700</div>
+            </div>
+          </div>
+
+          <h3 class="menu-category-title">BEEF BURGERS</h3>
+          <div class="menu-items-grid">
+            <div class="menu-item">
+              <div class="menu-item-name">Beef Burger</div>
+              <div class="menu-item-price">Rs. 350</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Beef Burger + Cheese</div>
+              <div class="menu-item-price">Rs. 400</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Hunter Beef Burger</div>
+              <div class="menu-item-price">Rs. 450</div>
+            </div>
+          </div>
+
+          <h3 class="menu-category-title">CHICKEN BURGERS</h3>
+          <div class="menu-items-grid">
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Burger</div>
+              <div class="menu-item-price">Rs. 300</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Cheese Burger</div>
+              <div class="menu-item-price">Rs. 350</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Double Peri Burger</div>
+              <div class="menu-item-price">Rs. 400</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Grilled Burger</div>
+              <div class="menu-item-price">Rs. 380</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Double Grilled Burger</div>
+              <div class="menu-item-price">Rs. 450</div>
+            </div>
+          </div>
+
+          <h3 class="menu-category-title">BROAST ROLLS</h3>
+          <div class="menu-items-grid">
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Chaini Roll</div>
+              <div class="menu-item-price">Rs. 300</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Breast Mayo Roll</div>
+              <div class="menu-item-price">Rs. 320</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Breast Cheese Roll</div>
+              <div class="menu-item-price">Rs. 350</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Dynamite Breast Roll</div>
+              <div class="menu-item-price">Rs. 350</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Peri Peri Roll</div>
+              <div class="menu-item-price">Rs. 350</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Mayo Garlic Roll</div>
+              <div class="menu-item-price">Rs. 350</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Combo Sauce Roll</div>
+              <div class="menu-item-price">Rs. 380</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Maxican Breast Roll</div>
+              <div class="menu-item-price">Rs. 380</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Twitter Breast Roll</div>
+              <div class="menu-item-price">Rs. 380</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Vegetable Roll</div>
+              <div class="menu-item-price">Rs. 250</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Maharaja Roll</div>
+              <div class="menu-item-price">Rs. 450</div>
+            </div>
+          </div>
+
+          <div class="menu-note">
+            <p>
+              OPEN MONDAY - SUNDAY 6 PM TO 3 AM | ORDER ONLINE AT 0314-0339545
+            </p>
+          </div>
+        </div>
+
+        <!-- Pizza Menu -->
+        <div class="menu-section" id="pizza-menu">
+          <div class="pizza-sizes">
+            <div class="size-option">
+              <div class="size-label">SMALL</div>
+              <div class="size-price">Rs. 450</div>
+            </div>
+            <div class="size-option">
+              <div class="size-label">MEDIUM</div>
+              <div class="size-price">Rs. 850</div>
+            </div>
+            <div class="size-option">
+              <div class="size-label">LARGE</div>
+              <div class="size-price">Rs. 1400</div>
+            </div>
+          </div>
+
+          <h3 class="menu-category-title">MEDIUM SPICY PIZZAS</h3>
+          <div class="menu-items-grid">
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Tikka</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Creamy Tikka</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Fajita</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Malai</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Creamy</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Arabian</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Italian</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Supreme</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Afghani</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Pepperoni</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Cheese Lovers</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Vegetable Lovers</div>
+              <div class="menu-item-price">-</div>
+            </div>
+          </div>
+
+          <div class="menu-items-grid">
+            <div class="menu-item">
+              <div class="menu-item-name">Buffalo Special</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Sicilian</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Peri Peri Special</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Hawaiian</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Spicy Tandoori</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Bihari</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Spicy Italian</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Spicy Shanghai</div>
+              <div class="menu-item-price">-</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Chicken Bar BQ</div>
+              <div class="menu-item-price">-</div>
+            </div>
+          </div>
+
+          <h3 class="menu-category-title">PREMIUM OPTIONS</h3>
+          <div class="menu-items-grid">
+            <div class="menu-item">
+              <div class="menu-item-name">Lava Pizza</div>
+              <div class="menu-item-price">Rs. 1149</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Kababish Pizza</div>
+              <div class="menu-item-price">Rs. 1599</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Crown Crust Pizza</div>
+              <div class="menu-item-price">Rs. 699</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">Kabab Crust Pizza</div>
+              <div class="menu-item-price">Rs. 1000</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-name">ChatGPT Special</div>
+              <div class="menu-item-price">Rs. 1600</div>
+            </div>
+          </div>
+
+          <div class="menu-note">
+            <p>
+              OPEN MONDAY - SUNDAY 6 PM TO 3 AM | ORDER ONLINE AT 0314-0339545
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+          <div class="contact-info">
+            <h3>Order Now</h3>
+            <p>
+              <i class="fas fa-map-marker-alt"></i> Society Phase 1 jamshoro
+            </p>
+            <p>
+              <i class="fas fa-phone"></i>
+              <a href="tel:+923140339545" style="color: white"
+                >(0314)0339545
+              </a>
+            </p>
+            <p><i class="fas fa-clock"></i> Mon-Sun: 6pm - 3am</p>
+
+            <div style="margin-top: 30px">
+              <a
+                href="tel:+923140339545"
+                class="call-btn"
+                style="display: inline-flex"
+                ><i class="fas fa-phone"></i> Call to Order</a
+              >
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <h3 style="color: var(--primary-dark); margin-bottom: 20px">
+              Send us a message
+            </h3>
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required />
+              </div>
+              <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <div class="logo">
+              <div class="logo-icon">
+                <i class="fas fa-mug-hot"></i>
+              </div>
+              <div>
+                <div class="logo-text">Chai GPT</div>
+                <div class="logo-subtitle">A Cup Full of Comfort</div>
+              </div>
+            </div>
+            <p>
+              Bringing warmth and comfort to your day, one perfect cup at a
+              time.
+            </p>
+          </div>
+
+          <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#menu">Menu</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+          <div class="social-links">
+            <h3>Connect With Us</h3>
+            <p>
+              Follow us on social media for daily updates and special offers.
+            </p>
+            <div class="social-icons">
+              <a href="https://www.facebook.com/chaigptofficial/"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="https://www.instagram.com/chaigpt__/?hl=en"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="(0314)0339545"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="copyright">
+          &copy; 2026 Chai GPT. All rights reserved. | Open Monday - Sunday 6 PM
+          to 3 AM
+        </div>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
