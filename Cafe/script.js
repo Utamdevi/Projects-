@@ -1,162 +1,162 @@
-// Menu Toggle Functionality
-document.addEventListener("DOMContentLoaded", function () {
-  const categoryBtns = document.querySelectorAll(".category-btn");
-  const menuSections = document.querySelectorAll(".menu-section");
+// Mobile Navigation
+const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+const mobileMenuClose = document.getElementById("mobileMenuClose");
+const mobileNav = document.getElementById("mobileNav");
+const mobileNavLinks = mobileNav.querySelectorAll("a");
 
-  // Function to switch between menu categories
-  function switchMenu(category) {
+// Create overlay for mobile menu
+const overlay = document.createElement("div");
+overlay.className = "mobile-overlay";
+document.body.appendChild(overlay);
+
+// Toggle mobile menu
+function toggleMobileMenu() {
+  mobileNav.classList.toggle("active");
+  overlay.classList.toggle("active");
+  document.body.style.overflow = mobileNav.classList.contains("active")
+    ? "hidden"
+    : "";
+}
+
+// Open mobile menu
+mobileMenuBtn.addEventListener("click", toggleMobileMenu);
+
+// Close mobile menu
+mobileMenuClose.addEventListener("click", toggleMobileMenu);
+overlay.addEventListener("click", toggleMobileMenu);
+
+// Close mobile menu when clicking on links
+mobileNavLinks.forEach((link) => {
+  link.addEventListener("click", toggleMobileMenu);
+});
+
+// Menu Category Switching
+const categoryBtns = document.querySelectorAll(".category-btn");
+const menuSections = document.querySelectorAll(".menu-section");
+
+categoryBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    // Remove active class from all buttons
+    categoryBtns.forEach((b) => b.classList.remove("active"));
+
+    // Add active class to clicked button
+    btn.classList.add("active");
+
+    // Get category from data attribute
+    const category = btn.getAttribute("data-category");
+
     // Hide all menu sections
     menuSections.forEach((section) => {
       section.classList.remove("active");
     });
 
-    // Remove active class from all buttons
-    categoryBtns.forEach((btn) => {
-      btn.classList.remove("active");
-    });
-
-    // Show the selected menu section
-    const activeSection = document.getElementById(category + "-menu");
-    if (activeSection) {
-      activeSection.classList.add("active");
+    // Show selected menu section
+    const targetSection = document.getElementById(`${category}-menu`);
+    if (targetSection) {
+      targetSection.classList.add("active");
     }
+  });
+});
 
-    // Add active class to clicked button
-    const activeBtn = document.querySelector(
-      `.category-btn[data-category="${category}"]`
-    );
-    if (activeBtn) {
-      activeBtn.classList.add("active");
-    }
+// Smooth Scrolling for Anchor Links
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
 
-    // Smooth scroll to menu section if not already in view
-    const menuSection = document.getElementById("menu");
-    const headerHeight = document.querySelector("header").offsetHeight;
-    const menuSectionTop = menuSection.offsetTop - headerHeight - 20;
+    const targetId = this.getAttribute("href");
+    if (targetId === "#") return;
 
-    if (
-      window.scrollY > menuSectionTop + 100 ||
-      window.scrollY < menuSectionTop - 100
-    ) {
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      // Close mobile menu if open
+      if (mobileNav.classList.contains("active")) {
+        toggleMobileMenu();
+      }
+
       window.scrollTo({
-        top: menuSectionTop,
+        top: targetElement.offsetTop - 80,
         behavior: "smooth",
       });
     }
-  }
+  });
+});
 
-  // Add click event listeners to category buttons
-  categoryBtns.forEach((btn) => {
-    btn.addEventListener("click", function () {
-      const category = this.getAttribute("data-category");
-      switchMenu(category);
-    });
+// Contact Form Submission
+const contactForm = document.getElementById("contactForm");
+if (contactForm) {
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Get form data
+    const formData = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      message: document.getElementById("message").value,
+    };
+
+    // In a real application, you would send this data to a server
+    // For now, we'll just show a success message
+    alert("Thank you for your message! We will get back to you soon.");
+
+    // Reset form
+    this.reset();
+  });
+}
+
+// Sticky Header
+window.addEventListener("scroll", () => {
+  const header = document.querySelector("header");
+  if (window.scrollY > 100) {
+    header.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.15)";
+  } else {
+    header.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
+  }
+});
+
+// Social Media Links - Updated with actual URLs
+document.addEventListener("DOMContentLoaded", () => {
+  // Update phone numbers to be clickable
+  const phoneNumbers = document.querySelectorAll('[href*="tel:"]');
+  phoneNumbers.forEach((phone) => {
+    // Ensure phone numbers have proper format
+    const currentHref = phone.getAttribute("href");
+    if (currentHref.includes("03140339545")) {
+      phone.setAttribute("href", "tel:03140339545");
+    }
   });
 
-  // Check URL hash on page load
-  const hash = window.location.hash;
-  if (hash === "#pizza-menu" || hash === "#pizza") {
-    // Small delay to ensure DOM is fully loaded
-    setTimeout(() => {
-      switchMenu("pizza");
-    }, 100);
-  }
+  // Social media links functionality
+  const socialLinks = {
+    facebook: "https://www.facebook.com/chaigptofficial/",
+    instagram: "https://www.instagram.com/chaigpt__/?hl=en",
+    whatsapp: "https://wa.me/03140339545", // Updated WhatsApp link
+  };
 
-  // Contact form submission
-  const contactForm = document.getElementById("contactForm");
-  if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
-      e.preventDefault();
+  // Attach social media links
+  const facebookLink = document.querySelector(
+    '.social-icons a[href*="facebook"]'
+  );
+  const instagramLink = document.querySelector(
+    '.social-icons a[href*="instagram"]'
+  );
+  const whatsappLink = document.querySelector(
+    '.social-icons a[href*="whatsapp"]'
+  );
 
-      // Get form values
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const message = document.getElementById("message").value;
+  if (facebookLink) facebookLink.setAttribute("href", socialLinks.facebook);
+  if (instagramLink) instagramLink.setAttribute("href", socialLinks.instagram);
+  if (whatsappLink) whatsappLink.setAttribute("href", socialLinks.whatsapp);
 
-      // In a real application, you would send this data to a server
-      // For this demo, we'll just show an alert
-      alert(
-        `Thank you, ${name}! Your message has been received. We'll get back to you at ${email} soon.`
-      );
-
-      // Reset form
-      contactForm.reset();
-    });
-  }
-
-  // Smooth scrolling for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      const targetId = this.getAttribute("href");
-      if (targetId === "#") return;
-
-      // Handle menu category switching
-      if (targetId === "#menu" || targetId === "#pizza-menu") {
-        if (targetId === "#pizza-menu") {
-          switchMenu("pizza");
-        }
-        return;
-      }
-
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        const headerHeight = document.querySelector("header").offsetHeight;
-        window.scrollTo({
-          top: targetElement.offsetTop - headerHeight - 20,
-          behavior: "smooth",
-        });
-      }
-    });
+  // Add target="_blank" to social links
+  document.querySelectorAll(".social-icons a").forEach((link) => {
+    link.setAttribute("target", "_blank");
+    link.setAttribute("rel", "noopener noreferrer");
   });
+});
 
-  // Mobile menu functionality
-  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-  const mobileNav = document.getElementById("mobileNav");
-  const mobileMenuClose = document.getElementById("mobileMenuClose");
-
-  // Create mobile nav if it doesn't exist
-  if (!mobileNav && mobileMenuBtn) {
-    const navLinks = document.querySelector(".nav-links");
-    if (navLinks) {
-      const mobileNavContainer = document.createElement("div");
-      mobileNavContainer.className = "mobile-nav";
-      mobileNavContainer.id = "mobileNav";
-
-      const closeBtn = document.createElement("button");
-      closeBtn.className = "mobile-menu-close";
-      closeBtn.id = "mobileMenuClose";
-      closeBtn.innerHTML = '<i class="fas fa-times"></i>';
-
-      mobileNavContainer.appendChild(closeBtn);
-      mobileNavContainer.appendChild(navLinks.cloneNode(true));
-
-      document.body.appendChild(mobileNavContainer);
-    }
-  }
-
-  // Initialize mobile menu if elements exist
-  if (mobileMenuBtn) {
-    const mobileNav = document.getElementById("mobileNav");
-    const mobileMenuClose = document.getElementById("mobileMenuClose");
-
-    mobileMenuBtn.addEventListener("click", () => {
-      if (mobileNav) mobileNav.classList.add("active");
-    });
-
-    if (mobileMenuClose) {
-      mobileMenuClose.addEventListener("click", () => {
-        if (mobileNav) mobileNav.classList.remove("active");
-      });
-    }
-
-    // Close mobile menu when clicking on a link
-    const mobileNavLinks = document.querySelectorAll(".mobile-nav a");
-    mobileNavLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        if (mobileNav) mobileNav.classList.remove("active");
-      });
-    });
+// Close mobile menu when pressing Escape key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && mobileNav.classList.contains("active")) {
+    toggleMobileMenu();
   }
 });

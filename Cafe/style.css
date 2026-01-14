@@ -572,8 +572,14 @@ footer {
     font-size: 2.8rem;
   }
 
-  .nav-container .nav-links,
-  .nav-container .call-btn {
+  .pizza-sizes {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
     display: none;
   }
 
@@ -581,66 +587,66 @@ footer {
     display: block;
   }
 
-  .logo-img {
-    height: 45px;
+  .nav-container {
+    gap: 15px;
   }
 
-  .menu-items-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  .hero {
+    padding: 120px 0 80px;
   }
-}
 
-@media (max-width: 768px) {
   .hero h1 {
     font-size: 2.2rem;
   }
 
   .hero p {
-    font-size: 1.1rem;
-  }
-
-  .section {
-    padding: 60px 0;
+    font-size: 1rem;
   }
 
   .section-title {
     font-size: 2rem;
   }
 
-  .logo-img {
-    height: 40px;
-  }
-
-  .logo-text {
-    font-size: 1.6rem;
-  }
-
-  .menu-category-title {
-    font-size: 1.6rem;
-  }
-
-  .menu-items-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .pizza-sizes {
+  .menu-categories {
     flex-direction: column;
     align-items: center;
   }
 
-  .size-option {
+  .category-btn {
     width: 100%;
     max-width: 300px;
   }
 
-  .navbar {
-    height: 70px;
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-logo .logo {
+    justify-content: center;
+  }
+
+  .social-icons {
+    justify-content: center;
   }
 }
 
 @media (max-width: 576px) {
-  .hero {
-    padding: 70px 0;
+  .container {
+    padding: 0 15px;
+  }
+
+  .logo-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .logo-text {
+    font-size: 1.5rem;
   }
 
   .hero h1 {
@@ -652,26 +658,16 @@ footer {
     font-size: 1rem;
   }
 
-  .category-btn {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .footer-content {
+  .menu-items-grid {
     grid-template-columns: 1fr;
   }
 
-  .logo-img {
-    height: 35px;
-    margin-right: 10px;
+  .pizza-sizes {
+    gap: 15px;
   }
 
-  .logo-text {
-    font-size: 1.4rem;
-  }
-
-  .navbar {
-    padding: 10px 0;
-    height: 65px;
+  .size-option {
+    min-width: 120px;
+    padding: 15px;
   }
 }
