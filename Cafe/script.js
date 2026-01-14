@@ -82,24 +82,62 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 });
 
 // Contact Form Submission
+// Contact Form Submission with Formspree
 const contactForm = document.getElementById("contactForm");
 if (contactForm) {
-  contactForm.addEventListener("submit", function (e) {
+  contactForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    // Get form data
-    const formData = {
-      name: document.getElementById("name").value,
-      email: document.getElementById("email").value,
-      message: document.getElementById("message").value,
-    };
+    const submitBtn = this.querySelector(".submit-btn");
+    const originalBtnText = submitBtn.textContent;
+    const formMessage = document.getElementById("formMessage");
 
-    // In a real application, you would send this data to a server
-    // For now, we'll just show a success message
-    alert("Thank you for your message! We will get back to you soon.");
+    // Disable submit button and show loading state
+    submitBtn.textContent = "Sending...";
+    submitBtn.disabled = true;
+    formMessage.style.display = "none";
 
-    // Reset form
-    this.reset();
+    try {
+      const formData = new FormData(this);
+      const response = await fetch(this.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        // Success
+        formMessage.textContent =
+          "Thank you for your message! We will get back to you soon.";
+        formMessage.style.backgroundColor = "#d4edda";
+        formMessage.style.color = "#155724";
+        formMessage.style.display = "block";
+        this.reset();
+      } else {
+        // Error
+        const error = await response.json();
+        throw new Error(error.error || "Something went wrong");
+      }
+    } catch (error) {
+      // Show error message
+      formMessage.textContent =
+        "Sorry, there was an error sending your message. Please try again later.";
+      formMessage.style.backgroundColor = "#f8d7da";
+      formMessage.style.color = "#721c24";
+      formMessage.style.display = "block";
+      console.error("Form submission error:", error);
+    } finally {
+      // Re-enable submit button
+      submitBtn.textContent = originalBtnText;
+      submitBtn.disabled = false;
+
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        formMessage.style.display = "none";
+      }, 5000);
+    }
   });
 }
 
