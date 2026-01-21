@@ -1,80 +1,131 @@
-/* Dashboard Layout */
+/* ============================================
+   CSS Variables for Consistent Theming
+============================================ */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2c3e50;
+  --success-color: #27ae60;
+  --danger-color: #e74c3c;
+  --warning-color: #f39c12;
+  --light-bg: #f8f9fa;
+  --dark-bg: #2c3e50;
+  --text-primary: #2c3e50;
+  --text-secondary: #6c757d;
+  --text-light: #adb5bd;
+  --border-color: #e9ecef;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --transition: all 0.3s ease;
+}
+
+/* ============================================
+   Base Mobile-First Styles (up to 767px)
+============================================ */
+
+/* Dashboard Container */
 .dashboard {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-top: 2rem;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-@media (max-width: 1024px) {
-  .dashboard {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Left Column */
-.left-column {
+.left-column,
+.right-column {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
+  width: 100%;
 }
 
-/* Balance Display */
+/* Balance Display - Mobile */
 .balance-display {
   text-align: center;
-  padding: 1.5rem;
+  padding: 1.25rem 1rem;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .balance-display h3 {
-  color: #6c757d;
-  font-size: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
   margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
 .balance-amount {
-  font-size: 3rem;
+  font-size: 2.2rem;
   font-weight: bold;
-  color: #2c3e50;
+  color: var(--text-primary);
   margin-bottom: 1rem;
   font-family: "Courier New", monospace;
+  line-height: 1.2;
+  word-break: break-word;
+  letter-spacing: -0.5px;
 }
 
 .currency-selector {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  color: #6c757d;
+  gap: 8px;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
 }
 
 .currency-selector select {
-  padding: 0.5rem;
-  border: 1px solid #ddd;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   background: white;
-  color: #333;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  min-width: 120px;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
-/* Category Progress */
+.currency-selector select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Category Progress - Mobile */
 .category-progress {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding: 0.5rem;
 }
 
 .progress-item {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--light-bg);
+  border-radius: var(--border-radius);
 }
 
 .progress-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .progress-label {
@@ -82,358 +133,840 @@
   align-items: center;
   gap: 8px;
   font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.progress-label i {
+  font-size: 1rem;
 }
 
 .progress-amount {
-  font-size: 0.9rem;
-  color: #6c757d;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .progress-bar {
-  height: 8px;
-  background: #e9ecef;
+  height: 6px;
+  background: var(--border-color);
   border-radius: 4px;
   overflow: hidden;
+  width: 100%;
 }
 
 .progress-fill {
   height: 100%;
   border-radius: 4px;
   transition: width 0.5s ease;
+  background: var(--primary-color);
 }
 
 /* Progress Colors */
-.progress-food .progress-fill {
-  background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 100%);
+.progress-item:nth-child(1) .progress-fill {
+  background: var(--primary-color);
+}
+.progress-item:nth-child(2) .progress-fill {
+  background: var(--success-color);
+}
+.progress-item:nth-child(3) .progress-fill {
+  background: var(--warning-color);
+}
+.progress-item:nth-child(4) .progress-fill {
+  background: #9b59b6;
+}
+.progress-item:nth-child(5) .progress-fill {
+  background: #e74c3c;
 }
 
-.progress-rent .progress-fill {
-  background: linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%);
-}
-
-.progress-transport .progress-fill {
-  background: linear-gradient(90deg, #ffecd2 0%, #fcb69f 100%);
-}
-
-.progress-shopping .progress-fill {
-  background: linear-gradient(90deg, #84fab0 0%, #8fd3f4 100%);
-}
-
-.progress-entertainment .progress-fill {
-  background: linear-gradient(90deg, #d4fc79 0%, #96e6a1 100%);
-}
-
-.progress-other .progress-fill {
-  background: linear-gradient(90deg, #a6c0fe 0%, #f68084 100%);
-}
-
-/* Transactions List */
+/* Transactions List - Mobile */
 .transactions-list {
-  max-height: 400px;
+  max-height: 300px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5rem;
+}
+
+.transactions-list h3 {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  font-size: 1.1rem;
 }
 
 .transaction-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  border-bottom: 1px solid #eee;
-  transition: background 0.3s ease;
+  align-items: flex-start;
+  padding: 0.875rem 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: var(--transition);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
 }
 
 .transaction-item:hover {
-  background: #f8f9fa;
+  background: var(--light-bg);
 }
 
 .transaction-info {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 200px;
 }
 
 .transaction-icon {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: white;
+  flex-shrink: 0;
 }
 
 .transaction-details h4 {
-  font-size: 1rem;
+  font-size: 0.95rem;
   margin-bottom: 0.2rem;
+  word-break: break-word;
+  color: var(--text-primary);
+  font-weight: 500;
 }
 
 .transaction-category {
-  font-size: 0.85rem;
-  color: #6c757d;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  display: block;
+}
+
+.transaction-date {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-top: 0.2rem;
 }
 
 .transaction-amount {
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  text-align: right;
+  flex-shrink: 0;
 }
 
-.transaction-income {
-  color: #27ae60;
+.income {
+  color: var(--success-color);
 }
 
-.transaction-expense {
-  color: #e74c3c;
+.expense {
+  color: var(--danger-color);
 }
 
-/* Right Column */
-.right-column {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+/* Transaction Icon Colors */
+.transaction-icon.income {
+  background: var(--success-color);
+}
+.transaction-icon.expense {
+  background: var(--danger-color);
+}
+.transaction-icon.food {
+  background: #e67e22;
+}
+.transaction-icon.transport {
+  background: #3498db;
+}
+.transaction-icon.shopping {
+  background: #9b59b6;
+}
+.transaction-icon.bills {
+  background: #f1c40f;
 }
 
-/* Statistics Grid */
+/* Statistics Grid - Mobile */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 0.875rem;
+  padding: 0.5rem;
+}
+
+.stats-grid h3 {
+  grid-column: 1 / -1;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  font-size: 1.1rem;
 }
 
 .stat-item {
   text-align: center;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 8px;
+  padding: 1rem 0.75rem;
+  background: var(--light-bg);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.stat-item:hover {
+  border-color: var(--border-color);
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
+}
+
+.stat-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
 }
 
 .stat-value {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+  line-height: 1.2;
 }
 
 .stat-label {
-  font-size: 0.9rem;
-  color: #6c757d;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
-/* Form Styles */
+/* Stat Item Colors */
+.stat-item:nth-child(2) .stat-icon {
+  color: var(--success-color);
+}
+.stat-item:nth-child(3) .stat-icon {
+  color: var(--danger-color);
+}
+.stat-item:nth-child(4) .stat-icon {
+  color: var(--primary-color);
+}
+.stat-item:nth-child(5) .stat-icon {
+  color: var(--warning-color);
+}
+
+/* Form Styles - Mobile */
 .transaction-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding: 1rem;
+  background: var(--light-bg);
+  border-radius: var(--border-radius);
+}
+
+.transaction-form h3 {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-@media (max-width: 768px) {
-  .form-row {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: 1fr;
+  gap: 0.875rem;
 }
 
 .form-group label {
   font-weight: 500;
-  color: #2c3e50;
+  color: var(--text-primary);
+  font-size: 0.9rem;
 }
 
 .form-control {
-  padding: 0.8rem;
-  border: 1px solid #ddd;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
-  font-size: 1rem;
-  transition: border 0.3s ease;
+  font-size: 0.95rem;
+  transition: var(--transition);
+  width: 100%;
+  box-sizing: border-box;
+  background: white;
 }
 
 .form-control:focus {
   outline: none;
-  border-color: #3498db;
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
 .form-actions {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   margin-top: 1rem;
+  flex-direction: column;
 }
 
 .form-actions .btn {
-  flex: 1;
+  width: 100%;
+  padding: 0.875rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
 }
 
-/* Chart Card Styles */
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #2980b9;
+}
+
+.btn-secondary {
+  background: var(--light-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color) !important;
+}
+
+.btn-secondary:hover {
+  background: #e9ecef;
+}
+
+/* Chart Styles - Mobile */
 .chart-container {
   position: relative;
-  height: 300px;
+  height: 250px;
   width: 100%;
   margin-top: 1rem;
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  box-shadow: var(--box-shadow);
 }
 
-/* Chart controls */
 .chart-controls {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 0.75rem;
   margin-bottom: 1rem;
-  align-items: center;
+  align-items: stretch;
 }
 
 .chart-type-selector {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.4rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.chart-type-selector::-webkit-scrollbar {
+  display: none;
 }
 
 .chart-type-btn {
   padding: 0.4rem 0.8rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 20px;
   background: white;
   cursor: pointer;
   font-size: 0.85rem;
-  transition: all 0.3s ease;
+  transition: var(--transition);
   color: #666;
   font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .chart-type-btn.active {
-  background-color: var(--primary-color);
+  background: var(--primary-color);
   color: white;
   border-color: var(--primary-color);
 }
 
-.chart-type-btn:hover:not(.active) {
-  background-color: #f5f5f5;
-  transform: translateY(-1px);
-}
-
 .time-period-selector select {
-  padding: 0.4rem 0.8rem;
-  border: 1px solid #ddd;
-  border-radius: 20px;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
   background: white;
-  font-size: 0.85rem;
-  color: #666;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.time-period-selector select:hover {
-  border-color: var(--primary-color);
 }
 
 .chart-summary {
   display: flex;
-  justify-content: space-between;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 2px solid #f0f0f0;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-color);
 }
 
 .summary-item {
   text-align: center;
-  flex: 1;
-  padding: 0.5rem;
+  padding: 0.75rem;
+  background: var(--light-bg);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.summary-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
 }
 
 .summary-value {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--primary-color);
   margin-bottom: 0.25rem;
 }
 
 .summary-label {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-light);
   font-weight: 500;
 }
 
-/* Chart Legend */
 .chart-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
   margin-top: 1rem;
-  padding: 1rem;
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  justify-content: center;
+  padding: 0.875rem;
+  background-color: var(--light-bg);
+  border-radius: var(--border-radius);
 }
 
 .legend-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.85rem;
-  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.5rem;
   background: white;
   border-radius: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 
 .legend-color {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
-/* Responsive adjustments for chart */
-@media (max-width: 768px) {
+/* ============================================
+   Tablet Styles (768px to 1023px)
+============================================ */
+@media (min-width: 768px) {
+  .dashboard {
+    padding: 1.5rem;
+    gap: 1.75rem;
+  }
+
+  /* Balance Display - Tablet */
+  .balance-display {
+    padding: 1.5rem;
+    min-height: 200px;
+  }
+
+  .balance-amount {
+    font-size: 2.8rem;
+  }
+
+  /* Category Progress - Tablet */
+  .category-progress {
+    padding: 0.75rem;
+  }
+
+  .progress-item {
+    padding: 1rem;
+  }
+
+  .progress-bar {
+    height: 8px;
+  }
+
+  /* Transactions List - Tablet */
+  .transactions-list {
+    max-height: 350px;
+    padding: 0.75rem;
+  }
+
+  .transaction-item {
+    padding: 1rem;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  .transaction-info {
+    min-width: auto;
+  }
+
+  .transaction-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .transaction-details h4 {
+    font-size: 1rem;
+  }
+
+  .transaction-amount {
+    font-size: 1.1rem;
+  }
+
+  /* Statistics Grid - Tablet */
+  .stats-grid {
+    gap: 1rem;
+    padding: 0.75rem;
+  }
+
+  .stat-item {
+    padding: 1.25rem;
+  }
+
+  .stat-value {
+    font-size: 1.75rem;
+  }
+
+  .stat-icon {
+    font-size: 1.8rem;
+  }
+
+  /* Form Styles - Tablet */
+  .transaction-form {
+    padding: 1.25rem;
+  }
+
+  .form-actions {
+    flex-direction: row;
+  }
+
+  .form-actions .btn {
+    width: auto;
+    flex: 1;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Chart Styles - Tablet */
   .chart-container {
-    height: 250px;
+    height: 280px;
+    padding: 1.25rem;
   }
 
   .chart-controls {
-    flex-direction: column;
-    gap: 0.75rem;
-    align-items: stretch;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  .chart-type-selector,
-  .time-period-selector {
-    width: 100%;
-    justify-content: center;
+  .chart-type-selector {
+    overflow-x: visible;
+    flex-wrap: wrap;
   }
 
   .time-period-selector select {
-    width: 100%;
+    width: auto;
+    min-width: 150px;
   }
 
   .chart-summary {
-    flex-direction: column;
+    flex-direction: row;
     gap: 1rem;
   }
 
   .summary-item {
-    padding: 0.75rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .chart-container {
-    height: 220px;
-  }
-
-  .chart-type-btn {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.8rem;
+    padding: 0.875rem;
+    flex: 1;
   }
 
   .summary-value {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
+  }
+
+  .chart-legend {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
+
+/* ============================================
+   Small Desktop & Large Tablet (1024px to 1279px)
+============================================ */
+@media (min-width: 1024px) {
+  .dashboard {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 2rem;
+  }
+
+  /* Balance Display - Small Desktop */
+  .balance-display {
+    padding: 1.75rem;
+    min-height: 220px;
+  }
+
+  .balance-amount {
+    font-size: 3rem;
+  }
+
+  /* Category Progress - Small Desktop */
+  .category-progress {
+    padding: 1rem;
+  }
+
+  .progress-item {
+    padding: 1.1rem;
+  }
+
+  /* Transactions List - Small Desktop */
+  .transactions-list {
+    max-height: 400px;
+  }
+
+  .transaction-item {
+    padding: 1.1rem;
+  }
+
+  .transaction-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  /* Statistics Grid - Small Desktop */
+  .stats-grid {
+    gap: 1.25rem;
+  }
+
+  .stat-item {
+    padding: 1.4rem;
+  }
+
+  /* Chart Styles - Small Desktop */
+  .chart-container {
+    height: 300px;
+  }
+
+  .chart-legend {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================================
+   Desktop Styles (1280px and above)
+============================================ */
+@media (min-width: 1280px) {
+  .dashboard {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2.5rem;
+  }
+
+  .left-column,
+  .right-column {
+    gap: 2rem;
+  }
+
+  /* Balance Display - Desktop */
+  .balance-display {
+    padding: 2rem;
+    min-height: 240px;
+  }
+
+  .balance-amount {
+    font-size: 3.5rem;
+  }
+
+  /* Category Progress - Desktop */
+  .category-progress {
+    padding: 1.25rem;
+  }
+
+  .progress-item {
+    padding: 1.25rem;
+  }
+
+  /* Transactions List - Desktop */
+  .transactions-list {
+    padding: 1rem;
+  }
+
+  /* Statistics Grid - Desktop */
+  .stats-grid {
+    gap: 1.5rem;
+  }
+
+  .stat-item {
+    padding: 1.5rem;
+  }
+
+  .stat-value {
+    font-size: 2rem;
+  }
+
+  .stat-icon {
+    font-size: 2rem;
+  }
+
+  /* Form Styles - Desktop */
+  .transaction-form {
+    padding: 1.5rem;
+  }
+
+  /* Chart Styles - Desktop */
+  .chart-container {
+    height: 350px;
+    padding: 1.5rem;
+  }
+
+  .chart-legend {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 1.25rem;
+  }
+}
+
+/* ============================================
+   Large Desktop (1440px and above)
+============================================ */
+@media (min-width: 1440px) {
+  .dashboard {
+    gap: 2.5rem;
+  }
+
+  .balance-amount {
+    font-size: 4rem;
+  }
+
+  .chart-container {
+    height: 380px;
+  }
+}
+
+/* ============================================
+   Ultra-wide Screens (1920px and above)
+============================================ */
+@media (min-width: 1920px) {
+  .dashboard {
+    max-width: 1600px;
+    gap: 3rem;
+  }
+
+  .balance-display {
+    padding: 2.5rem;
+    min-height: 260px;
+  }
+
+  .balance-amount {
+    font-size: 4.5rem;
+  }
+
+  .chart-container {
+    height: 400px;
+  }
+}
+
+/* ============================================
+   Touch Device Optimizations
+============================================ */
+@media (hover: none) and (pointer: coarse) {
+  .transaction-item:hover {
+    background: transparent;
+  }
+
+  .transaction-item:active {
+    background: var(--light-bg);
+  }
+
+  .stat-item:hover,
+  .summary-item:hover {
+    transform: none;
+  }
+
+  .form-control,
+  .chart-type-btn,
+  select,
+  button,
+  .transaction-item {
+    min-height: 44px; /* Minimum touch target size */
+  }
+
+  .chart-type-btn {
+    padding: 0.5rem 1rem;
+  }
+
+  .progress-label,
+  .legend-item {
+    padding: 0.5rem;
+  }
+}
+
+/* ============================================
+   Print Styles
+============================================ */
+@media print {
+  .dashboard {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 0;
+    padding: 0;
+  }
+
+  .chart-controls,
+  .form-actions,
+  .transaction-form,
+  .currency-selector select {
+    display: none;
+  }
+
+  .balance-display,
+  .stat-item,
+  .transaction-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+/* ============================================
+   Utility Classes for Responsive Behavior
+============================================ */
+.hide-on-mobile {
+  display: none;
+}
+
+.show-on-mobile {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .hide-on-mobile {
+    display: block;
+  }
+
+  .show-on-mobile {
+    display: none;
   }
 }
 
@@ -451,6 +984,8 @@
   border-radius: 6px;
   margin: 1rem 0;
   text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Success States */
@@ -461,6 +996,8 @@
   border-radius: 6px;
   margin: 1rem 0;
   text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Animation for new transactions */
@@ -477,4 +1014,57 @@
 
 .transaction-item.new {
   animation: slideIn 0.3s ease;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent horizontal overflow */
+body {
+  overflow-x: hidden;
+  width: 100%;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+/* Responsive typography */
+@media (max-width: 767px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+  h3 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
 }
