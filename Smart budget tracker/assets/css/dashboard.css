@@ -568,7 +568,7 @@
 /* ============================================
    Tablet Styles (768px to 1023px)
 ============================================ */
-@media (min-width: 768px) {
+@media (max-width: 576px) {
   .dashboard {
     padding: 1.5rem;
     gap: 1.75rem;
