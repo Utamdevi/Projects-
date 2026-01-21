@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Budget Tracker | Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <!-- Header & Navigation -->
+    <header>
+      <div class="container header-content">
+        <a href="index.html" class="logo">
+          <i class="fas fa-chart-pie"></i>
+          <div class="logo-text">
+            <span class="logo-part1">Spend</span
+            ><span class="logo-part2">ora</span>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links" id="navLinks">
+            <li>
+              <a href="index.html" class="active"
+                ><i class="fas fa-home"></i> Dashboard</a
+              >
+            </li>
+
+            <li>
+              <a href="expenses.html"
+                ><i class="fas fa-exchange-alt"></i> Expenses</a
+              >
+            </li>
+            <li>
+              <a href="reports.html"
+                ><i class="fas fa-chart-bar"></i> Reports</a
+              >
+            </li>
+            <li>
+              <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+            </li>
+          </ul>
+
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <h1>Budget Smarter, Not Harder.</h1>
+        <p>
+          Budget Smarter, Not Harder. Get a clear, intuitive dashboard that
+          makes managing your money effortless.
+        </p>
+        <div class="cta-buttons">
+          <button class="btn btn-primary" id="startJourneyBtn">
+            <i class="fas fa-rocket"></i> Start Free Journey
+          </button>
+          <button class="btn btn-secondary" id="howItWorksBtn">
+            <i class="fas fa-play-circle"></i> See How It Works
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard Content -->
+    <main class="container">
+      <div class="dashboard">
+        <!-- Left Column -->
+        <div class="left-column">
+          <!-- Balance Card -->
+          <div class="card">
+            <h2><i class="fas fa-wallet"></i> Balance</h2>
+            <div class="balance-display">
+              <h3>Your Current Balance</h3>
+              <div class="balance-amount" id="balanceAmount">₦0.00</div>
+              <div class="currency-selector">
+                <span>Currency:</span>
+                <select id="currencySelect">
+                  <option value="NGN">Nigerian Naira (₦)</option>
+                  <option value="PKR">Pakistani Rupee (₨)</option>
+                  <option value="USD">US Dollar ($)</option>
+                  <option value="EUR">Euro (€)</option>
+                  <option value="GBP">British Pound (£)</option>
+                  <option value="JPY">Japanese Yen (¥)</option>
+                  <option value="CAD">Canadian Dollar (C$)</option>
+                  <option value="AUD">Australian Dollar (A$)</option>
+                  <option value="INR">Indian Rupee (₹)</option>
+                  <option value="CNY">Chinese Yuan (¥)</option>
+                  <option value="ZAR">South African Rand (R)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Category Progress -->
+            <div class="category-progress" id="categoryProgress">
+              <!-- Progress bars will be loaded here -->
+              <div class="no-transactions-message">
+                <i class="fas fa-chart-bar"></i>
+                <p>
+                  No transactions yet. Add your first transaction to see
+                  progress.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transactions Card -->
+          <div class="card">
+            <h2><i class="fas fa-exchange-alt"></i> Recent Transactions</h2>
+            <div class="transactions-list" id="transactionsList">
+              <!-- Transactions will be loaded here -->
+              <div class="no-transactions-message">
+                <i class="fas fa-exchange-alt"></i>
+                <p>No transactions yet. Add your first transaction above!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+          <!-- Statistics Card -->
+          <div class="card">
+            <h2><i class="fas fa-chart-line"></i> Statistics</h2>
+            <div class="stats-grid">
+              <div class="stat-item">
+                <div class="stat-value" id="totalUsers">10K+</div>
+                <div class="stat-label">Total Users</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value" id="totalTransactions">₦0</div>
+                <div class="stat-label">Total Transactions</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value" id="activeUsers">98%</div>
+                <div class="stat-label">Active Users</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value" id="supportHours">24/7</div>
+                <div class="stat-label">Support Hours</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Transaction Card -->
+          <div class="card">
+            <h2><i class="fas fa-plus-circle"></i> Add Transaction</h2>
+            <form class="transaction-form" id="transactionForm">
+              <div class="form-group">
+                <label for="transactionType">Transaction Type</label>
+                <select class="form-control" id="transactionType">
+                  <option value="expense">Expense</option>
+                  <option value="income">Income</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="transactionName">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="transactionName"
+                  placeholder="e.g., Netflix Subscription"
+                  required
+                />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="transactionAmount">Amount</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="transactionAmount"
+                    placeholder="0.00"
+                    min="0"
+                    step="0.01"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="transactionCategory">Category</label>
+                  <select class="form-control" id="transactionCategory">
+                    <option value="entertainment">Entertainment</option>
+                    <option value="rent">Rent</option>
+                    <option value="food">Food</option>
+                    <option value="transport">Transport</option>
+                    <option value="shopping">Shopping</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="transactionDate">Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="transactionDate"
+                  required
+                />
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-small">
+                  <i class="fas fa-check"></i> Add
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-small"
+                  id="clearForm"
+                >
+                  <i class="fas fa-times"></i> Clear
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Chart Card -->
+         <div class="container">
+        <!-- Chart Card -->
+        <div class="card">
+            <h2><i class="fas fa-chart-pie"></i> Expense Distribution</h2>
+            <div class="chart-controls">
+                <div class="chart-type-selector">
+                    <button class="chart-type-btn active" data-type="doughnut">
+                        Doughnut
+                    </button>
+                    <button class="chart-type-btn" data-type="pie">
+                        Pie
+                    </button>
+                    <button class="chart-type-btn" data-type="bar">Bar</button>
+                </div>
+                <div class="time-period-selector">
+                    <select id="timePeriodSelect">
+                        <option value="week">This Week</option>
+                        <option value="month" selected>This Month</option>
+                        <option value="year">This Year</option>
+                        <option value="all">All Time</option>
+                    </select>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="expenseChart"></canvas>
+            </div>
+            <div class="chart-summary">
+                <div class="summary-item">
+                    <div class="summary-value" id="totalExpense">₦0.00</div>
+                    <div class="summary-label">Total Expense</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value" id="categoryCount">0</div>
+                    <div class="summary-label">Categories</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value" id="highestExpense">₦0.00</div>
+                    <div class="summary-label">Highest</div>
+                </div>
+            </div>
+            
+            <div class="categories-list" id="categoriesList">
+                <!-- Categories will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-info">
+            <div class="footer-logo">Spend<span>Ora</span></div>
+            <p class="footer-description">
+              Beyond the Basics: Our Full-Stack Budget Tracker helps you take
+              control of your finances with powerful analytics and intuitive
+              tools.
+            </p>
+          </div>
+          <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+<li><a href="expenses.html">Expenses</a></li>
+              <li><a href="reports.html">Reports</a></li>
+              <li><a href="profile.html">Profile</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Community</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          &copy; 2025 BudgetTracker. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+     <script src="assets/js/chart-manager.js"></script>
+    
+     
+  </body>
+</html>
