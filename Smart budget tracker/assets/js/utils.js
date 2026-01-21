@@ -251,3 +251,21 @@ class BudgetUtils {
     };
   }
 }
+// utils.js
+
+function formatCurrency(amount) {
+  return "₦" + Number(amount).toLocaleString();
+}
+
+function formatDate(dateStr) {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString();
+}
+
+function getMonth(dateStr) {
+  return new Date(dateStr).getMonth() + 1;
+}
+
+function getYear(dateStr) {
+  return new Date(dateStr).getFullYear();
+}
