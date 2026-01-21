@@ -1,11 +1,11 @@
 // Profile Management
 let userProfile = JSON.parse(localStorage.getItem("userProfile")) || {
   id: 1,
-  fullName: "John Smith",
-  email: "john.smith@example.com",
-  phone: "+234 812 345 6789",
-  location: "Lagos, Nigeria",
-  currency: "NGN",
+  fullName: "Utamdevi",
+  email: "rathiamn85@gmail.com",
+  phone: "0332-8789439",
+  location: "Hyd, Pakistan",
+  currency: "pakistan Rs.",
   monthStart: 1,
   notifications: {
     email: true,
@@ -13,7 +13,7 @@ let userProfile = JSON.parse(localStorage.getItem("userProfile")) || {
     budgetAlerts: false,
     balanceAlerts: false,
   },
-  createdAt: "2023-01-01",
+  createdAt: "2025-01-01",
   avatarInitials: "JS",
 };
 
