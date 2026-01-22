@@ -1,13 +1,18 @@
 // expenses.js
-// Initialize mobile menu
-initMobileMenu();
+
+/* ================= INITIAL SETUP ================= */
+document.addEventListener("DOMContentLoaded", () => {
+  initMobileMenu();
+  renderTable();
+});
+
 let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 let filteredTransactions = [...transactions];
 
 const rowsPerPage = 5;
 let currentPage = 1;
 
-// DOM Elements
+/* ================= DOM ELEMENTS ================= */
 const tableBody = document.getElementById("transactionsTableBody");
 const totalCount = document.getElementById("totalTransactionsCount");
 const totalIncome = document.getElementById("totalIncome");
@@ -26,7 +31,7 @@ const selectAllCheckbox = document.getElementById("selectAllCheckbox");
 const deleteSelectedBtn = document.getElementById("deleteSelectedBtn");
 const exportBtn = document.getElementById("exportBtn");
 
-// Sample Data (only first time)
+/* ================= SAMPLE DATA (FIRST TIME) ================= */
 if (transactions.length === 0) {
   transactions = [
     {
@@ -50,7 +55,7 @@ if (transactions.length === 0) {
   filteredTransactions = [...transactions];
 }
 
-// Render Table
+/* ================= RENDER TABLE ================= */
 function renderTable() {
   tableBody.innerHTML = "";
 
@@ -59,7 +64,6 @@ function renderTable() {
 
   paginated.forEach((tx) => {
     const row = document.createElement("tr");
-
     row.innerHTML = `
       <td><input type="checkbox" class="rowCheckbox" data-id="${tx.id}"></td>
       <td>${formatDate(tx.date)}</td>
@@ -68,12 +72,11 @@ function renderTable() {
       <td>${tx.type}</td>
       <td class="text-right">${formatCurrency(tx.amount)}</td>
       <td>
-        <button onclick="deleteTransaction(${tx.id})" class="btn btn-danger btn-sm">
+        <button class="btn btn-danger btn-sm" onclick="deleteTransaction(${tx.id})">
           <i class="fas fa-trash"></i>
         </button>
       </td>
     `;
-
     tableBody.appendChild(row);
   });
 
@@ -81,12 +84,13 @@ function renderTable() {
   updatePagination();
 }
 
-// Summary
+/* ================= SUMMARY ================= */
 function updateSummary() {
   totalCount.textContent = filteredTransactions.length;
 
   let income = 0,
     expense = 0;
+
   filteredTransactions.forEach((tx) => {
     tx.type === "income" ? (income += tx.amount) : (expense += tx.amount);
   });
@@ -95,7 +99,7 @@ function updateSummary() {
   totalExpenses.textContent = formatCurrency(expense);
 }
 
-// Pagination
+/* ================= PAGINATION ================= */
 function updatePagination() {
   const totalPages = Math.ceil(filteredTransactions.length / rowsPerPage) || 1;
   pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
@@ -104,7 +108,17 @@ function updatePagination() {
   nextBtn.disabled = currentPage === totalPages;
 }
 
-// Filters
+prevBtn.addEventListener("click", () => {
+  currentPage--;
+  renderTable();
+});
+
+nextBtn.addEventListener("click", () => {
+  currentPage++;
+  renderTable();
+});
+
+/* ================= FILTERS ================= */
 applyFiltersBtn.addEventListener("click", () => {
   filteredTransactions = transactions.filter((tx) => {
     return (
@@ -120,7 +134,7 @@ applyFiltersBtn.addEventListener("click", () => {
   renderTable();
 });
 
-// Delete Single
+/* ================= DELETE ================= */
 function deleteTransaction(id) {
   if (!confirm("Delete this transaction?")) return;
 
@@ -130,32 +144,33 @@ function deleteTransaction(id) {
   renderTable();
 }
 
-// Select All
 selectAllCheckbox.addEventListener("change", () => {
   document.querySelectorAll(".rowCheckbox").forEach((cb) => {
     cb.checked = selectAllCheckbox.checked;
   });
 });
 
-// Delete Selected
 deleteSelectedBtn.addEventListener("click", () => {
-  const selected = [...document.querySelectorAll(".rowCheckbox:checked")].map(
-    (cb) => Number(cb.dataset.id),
-  );
+  const selectedIds = [
+    ...document.querySelectorAll(".rowCheckbox:checked"),
+  ].map((cb) => Number(cb.dataset.id));
 
-  if (selected.length === 0) return alert("No transactions selected");
+  if (selectedIds.length === 0) {
+    alert("No transactions selected");
+    return;
+  }
 
   if (!confirm("Delete selected transactions?")) return;
 
-  transactions = transactions.filter((tx) => !selected.includes(tx.id));
+  transactions = transactions.filter((tx) => !selectedIds.includes(tx.id));
   localStorage.setItem("transactions", JSON.stringify(transactions));
   filteredTransactions = [...transactions];
   renderTable();
 });
 
-// CSV Export
+/* ================= EXPORT CSV ================= */
 exportBtn.addEventListener("click", () => {
-  let csv = "Date,Description,Category,Type,Amount\n";
+  let csv = "Date,Description,Category,Type,Amount (PKR)\n";
 
   filteredTransactions.forEach((tx) => {
     csv += `${tx.date},${tx.description},${tx.category},${tx.type},${tx.amount}\n`;
@@ -164,36 +179,39 @@ exportBtn.addEventListener("click", () => {
   const blob = new Blob([csv], { type: "text/csv" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = "transactions.csv";
+  link.download = "transactions_pkr.csv";
   link.click();
 });
 
-// Pagination Buttons
-prevBtn.addEventListener("click", () => {
-  currentPage--;
-  renderTable();
-});
+/* ================= HELPERS ================= */
+function formatCurrency(amount) {
+  return `₨ ${amount.toLocaleString("en-PK")}`;
+}
 
-nextBtn.addEventListener("click", () => {
-  currentPage++;
-  renderTable();
-});
+function formatDate(date) {
+  return new Date(date).toLocaleDateString("en-GB");
+}
 
-// Initial Load
-renderTable();
+function getMonth(date) {
+  return new Date(date).getMonth() + 1;
+}
+
+function getYear(date) {
+  return new Date(date).getFullYear();
+}
+
+/* ================= MOBILE MENU ================= */
 function initMobileMenu() {
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const navLinks = document.getElementById("navLinks");
 
-  if (mobileMenuBtn && navLinks) {
-    mobileMenuBtn.addEventListener("click", function () {
-      navLinks.classList.toggle("show");
-      const icon = this.querySelector("i");
-      if (navLinks.classList.contains("show")) {
-        icon.className = "fas fa-times";
-      } else {
-        icon.className = "fas fa-bars";
-      }
-    });
-  }
+  if (!mobileMenuBtn || !navLinks) return;
+
+  mobileMenuBtn.addEventListener("click", function () {
+    navLinks.classList.toggle("show");
+    const icon = this.querySelector("i");
+    icon.className = navLinks.classList.contains("show")
+      ? "fas fa-times"
+      : "fas fa-bars";
+  });
 }

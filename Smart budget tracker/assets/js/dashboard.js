@@ -1,6 +1,11 @@
-// Dashboard Specific Functionality
-// Initialize mobile menu
+// ======================
+// Global Mobile Menu Init
+// ======================
 initMobileMenu();
+
+// ======================
+// Dashboard Manager Class
+// ======================
 class DashboardManager {
   constructor(app) {
     this.app = app;
@@ -12,6 +17,7 @@ class DashboardManager {
     this.setDefaultDate();
     this.loadSampleDataIfEmpty();
     this.setupChartResize();
+    this.renderCharts();
   }
 
   setDefaultDate() {
@@ -25,77 +31,9 @@ class DashboardManager {
 
   loadSampleDataIfEmpty() {
     if (this.app.transactions.length === 0) {
-      // Uncomment to load sample data for demo
+      // Uncomment to load sample data
       // this.loadSampleData();
     }
-  }
-
-  loadSampleData() {
-    const sampleTransactions = [
-      {
-        id: BudgetUtils.generateId(),
-        type: "expense",
-        name: "Grocery Shopping",
-        amount: 15000,
-        category: "food",
-        date: new Date().toISOString().split("T")[0],
-        timestamp: new Date().toISOString(),
-      },
-      {
-        id: BudgetUtils.generateId(),
-        type: "income",
-        name: "Salary",
-        amount: 300000,
-        category: "other",
-        date: new Date().toISOString().split("T")[0],
-        timestamp: new Date(Date.now() - 86400000).toISOString(),
-      },
-      {
-        id: BudgetUtils.generateId(),
-        type: "expense",
-        name: "Netflix Subscription",
-        amount: 3600,
-        category: "entertainment",
-        date: new Date().toISOString().split("T")[0],
-        timestamp: new Date(Date.now() - 172800000).toISOString(),
-      },
-      {
-        id: BudgetUtils.generateId(),
-        type: "expense",
-        name: "Fuel",
-        amount: 8000,
-        category: "transport",
-        date: new Date().toISOString().split("T")[0],
-        timestamp: new Date(Date.now() - 259200000).toISOString(),
-      },
-      {
-        id: BudgetUtils.generateId(),
-        type: "expense",
-        name: "Apartment Rent",
-        amount: 120000,
-        category: "rent",
-        date: new Date().toISOString().split("T")[0],
-        timestamp: new Date(Date.now() - 345600000).toISOString(),
-      },
-      {
-        id: BudgetUtils.generateId(),
-        type: "expense",
-        name: "Clothes Shopping",
-        amount: 25000,
-        category: "shopping",
-        date: new Date().toISOString().split("T")[0],
-        timestamp: new Date(Date.now() - 432000000).toISOString(),
-      },
-    ];
-
-    sampleTransactions.forEach((transaction) => {
-      this.app.addTransaction(transaction);
-    });
-
-    BudgetUtils.showNotification(
-      "Sample data loaded for demonstration",
-      "info",
-    );
   }
 
   setupDashboardListeners() {
@@ -131,7 +69,10 @@ class DashboardManager {
       this.app.saveData();
       this.app.updateUI();
       BudgetUtils.showNotification(
-        `${categoryInfo.name} budget updated to ${BudgetUtils.formatCurrency(newBudget, this.app.currentCurrency)}`,
+        `${categoryInfo.name} budget updated to ${BudgetUtils.formatCurrency(
+          newBudget,
+          this.app.currentCurrency,
+        )}`,
         "success",
       );
     }
@@ -292,16 +233,16 @@ class DashboardManager {
           <h4><i class="fas fa-bolt"></i> Quick Add</h4>
           <div class="quick-add-buttons">
             <button class="quick-add-btn" data-type="expense" data-category="food" data-amount="5000">
-              <i class="fas fa-utensils"></i> Food ₦5,000
+              <i class="fas fa-utensils"></i> Food ₨5,000
             </button>
             <button class="quick-add-btn" data-type="expense" data-category="transport" data-amount="3000">
-              <i class="fas fa-bus"></i> Transport ₦3,000
+              <i class="fas fa-bus"></i> Transport ₨3,000
             </button>
             <button class="quick-add-btn" data-type="expense" data-category="entertainment" data-amount="2000">
-              <i class="fas fa-film"></i> Entertainment ₦2,000
+              <i class="fas fa-film"></i> Entertainment ₨2,000
             </button>
             <button class="quick-add-btn" data-type="income" data-category="other" data-amount="10000">
-              <i class="fas fa-money-bill-wave"></i> Income ₦10,000
+              <i class="fas fa-money-bill-wave"></i> Income ₨10,000
             </button>
           </div>
         </div>
@@ -309,13 +250,11 @@ class DashboardManager {
 
       formCard.insertAdjacentHTML("beforeend", quickAddHTML);
 
-      // Add event listeners to quick add buttons
       document.querySelectorAll(".quick-add-btn").forEach((btn) => {
         btn.addEventListener("click", (e) => {
           const type = e.currentTarget.dataset.type;
           const category = e.currentTarget.dataset.category;
           const amount = parseFloat(e.currentTarget.dataset.amount);
-
           this.quickAddTransaction(type, category, amount);
         });
       });
@@ -345,6 +284,7 @@ class DashboardManager {
         `${type === "income" ? "Income" : "Expense"} added successfully!`,
         "success",
       );
+      this.renderCharts();
     }
   }
 
@@ -359,9 +299,104 @@ class DashboardManager {
       }, 250);
     });
   }
+
+  renderCharts() {
+    this.renderPieChart();
+    this.renderBarChart();
+  }
+
+  renderPieChart() {
+    const pieCanvas = document.getElementById("pieChart");
+    if (!pieCanvas) return;
+
+    const expenseTransactions = this.app.transactions.filter(
+      (t) => t.type === "expense",
+    );
+
+    const categoryTotals = {};
+    expenseTransactions.forEach((t) => {
+      if (!categoryTotals[t.category]) categoryTotals[t.category] = 0;
+      categoryTotals[t.category] += t.amount;
+    });
+
+    const labels = Object.keys(categoryTotals);
+    const data = Object.values(categoryTotals);
+
+    if (this.pieChart) this.pieChart.destroy();
+
+    this.pieChart = new Chart(pieCanvas, {
+      type: "pie",
+      data: {
+        labels,
+        datasets: [
+          {
+            data,
+            backgroundColor: labels.map(
+              (c) => BudgetUtils.getCategoryInfo(c).color,
+            ),
+          },
+        ],
+      },
+      options: {
+        plugins: {
+          legend: { position: "bottom" },
+        },
+      },
+    });
+  }
+
+  renderBarChart() {
+    const barCanvas = document.getElementById("barChart");
+    if (!barCanvas) return;
+
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    const incomeByMonth = new Array(12).fill(0);
+    const expenseByMonth = new Array(12).fill(0);
+
+    this.app.transactions.forEach((t) => {
+      const monthIndex = new Date(t.date).getMonth();
+      if (t.type === "income") incomeByMonth[monthIndex] += t.amount;
+      else expenseByMonth[monthIndex] += t.amount;
+    });
+
+    if (this.barChart) this.barChart.destroy();
+
+    this.barChart = new Chart(barCanvas, {
+      type: "bar",
+      data: {
+        labels: months,
+        datasets: [
+          { label: "Income", data: incomeByMonth },
+          { label: "Expense", data: expenseByMonth },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "bottom" },
+        },
+      },
+    });
+  }
 }
 
-// Initialize Dashboard Manager
+// ======================
+// Initialize Dashboard
+// ======================
 document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     if (window.budgetTracker) {
@@ -370,6 +405,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 500);
 });
 
+// ======================
+// Mobile Menu
+// ======================
 function initMobileMenu() {
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const navLinks = document.getElementById("navLinks");
