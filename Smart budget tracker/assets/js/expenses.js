@@ -31,30 +31,6 @@ const selectAllCheckbox = document.getElementById("selectAllCheckbox");
 const deleteSelectedBtn = document.getElementById("deleteSelectedBtn");
 const exportBtn = document.getElementById("exportBtn");
 
-/* ================= SAMPLE DATA (FIRST TIME) ================= */
-if (transactions.length === 0) {
-  transactions = [
-    {
-      id: Date.now(),
-      date: "2025-01-10",
-      description: "Salary",
-      category: "other",
-      type: "income",
-      amount: 120000,
-    },
-    {
-      id: Date.now() + 1,
-      date: "2025-01-12",
-      description: "Food",
-      category: "food",
-      type: "expense",
-      amount: 15000,
-    },
-  ];
-  localStorage.setItem("transactions", JSON.stringify(transactions));
-  filteredTransactions = [...transactions];
-}
-
 /* ================= RENDER TABLE ================= */
 function renderTable() {
   tableBody.innerHTML = "";

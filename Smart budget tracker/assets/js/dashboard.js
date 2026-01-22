@@ -9,6 +9,12 @@ initMobileMenu();
 class DashboardManager {
   constructor(app) {
     this.app = app;
+
+    // ✅ Set default currency to PKR if not already set
+    if (!this.app.currentCurrency) {
+      this.app.currentCurrency = "PKR";
+    }
+
     this.setupDashboardListeners();
     this.initializeDashboard();
   }
