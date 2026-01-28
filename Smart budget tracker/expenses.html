@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Budget Tracker | Expenses</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/expenses.css" />
+  </head>
+  <body>
+    <!-- Header & Navigation -->
+    <header>
+      <div class="container header-content">
+        <a href="index.html" class="logo">
+          <i class="fas fa-chart-pie"></i>
+          <div class="logo-text">
+            <span class="logo-part1">Spend</span
+            ><span class="logo-part2">ora</span>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links" id="navLinks">
+            <li>
+              <a href="index.html"><i class="fas fa-home"></i> Dashboard</a>
+            </li>
+
+            <li>
+              <a href="expenses.html" class="active"
+                ><i class="fas fa-exchange-alt"></i> Expenses</a
+              >
+            </li>
+            <li>
+              <a href="reports.html"
+                ><i class="fas fa-chart-bar"></i> Reports</a
+              >
+            </li>
+            <li>
+              <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+            </li>
+          </ul>
+
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1><i class="fas fa-exchange-alt"></i> All Transactions</h1>
+        <p>View and manage all your income and expense transactions</p>
+      </div>
+    </section>
+
+    <!-- Expenses Content -->
+    <main class="container">
+      <!-- Filters Card -->
+      <div class="card">
+        <div class="filters-header">
+          <h2><i class="fas fa-filter"></i> Filter Transactions</h2>
+        </div>
+
+        <div class="filters-grid">
+          <div class="filter-group">
+            <label for="filterCategory">Category</label>
+            <select class="form-control" id="filterCategory">
+              <option value="all">All Categories</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="rent">Rent</option>
+              <option value="food">Food</option>
+              <option value="transport">Transport</option>
+              <option value="shopping">Shopping</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="filterType">Type</label>
+            <select class="form-control" id="filterType">
+              <option value="all">All Types</option>
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="filterMonth">Month</label>
+            <select class="form-control" id="filterMonth">
+              <option value="all">All Months</option>
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="filterYear">Year</label>
+            <select class="form-control" id="filterYear">
+              <option value="all">All Years</option>
+              <option value="2023">2023</option>
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
+              <option value="2026">2026</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>&nbsp;</label>
+            <button class="btn btn-primary" id="applyFiltersBtn">
+              <i class="fas fa-filter"></i> Apply Filters
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transactions Table Card -->
+      <div class="card">
+        <div class="table-header">
+          <h2><i class="fas fa-list"></i> Transaction History</h2>
+          <div class="table-actions">
+            <button class="btn btn-primary" id="exportBtn">
+              <i class="fas fa-download"></i> Export CSV
+            </button>
+            <button class="btn btn-danger" id="deleteSelectedBtn">
+              <i class="fas fa-trash"></i> Delete Selected
+            </button>
+          </div>
+        </div>
+
+        <div class="table-summary">
+          <div class="summary-item">
+            <span
+              class="summary-label"
+              style="color: black; font-weight: bolder"
+              >Total Transactions:</span
+            >
+            <span class="summary-value" id="totalTransactionsCount">0</span>
+          </div>
+          <div class="summary-item">
+            <span
+              class="summary-label"
+              style="color: black; font-weight: bolder"
+              >Total Income:</span
+            >
+            <span
+              class="summary-value success"
+              id="totalIncome"
+              style="color: #27ae60"
+              >Rs. 0</span
+            >
+          </div>
+          <div class="summary-item">
+            <span
+              class="summary-label"
+              style="color: black; font-weight: bolder"
+              >Total Expenses:</span
+            >
+            <span
+              class="summary-value danger"
+              id="totalExpenses"
+              style="color: #27ae60"
+              >Rs. 0</span
+            >
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="transactions-table" id="transactionsTable">
+            <thead>
+              <tr>
+                <th>
+                  <input type="checkbox" id="selectAllCheckbox" />
+                </th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th class="text-right">Amount</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="transactionsTableBody" style="color: black">
+              <!-- Transactions will be loaded here -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <div class="pagination">
+            <button
+              class="btn btn-secondary"
+              id="prevPageBtn"
+              disabled
+              style="background-color: #27ae60; color: white"
+            >
+              <i class="fas fa-chevron-left"></i>
+              Previous
+            </button>
+            <span class="page-info" id="pageInfo" style="color: black"
+              >Page 1 of 1</span
+            >
+            <button
+              class="btn btn-secondary"
+              id="nextPageBtn"
+              disabled
+              style="background-color: #27ae60; color: white"
+            >
+              Next <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-info">
+            <div class="footer-logo">Spend<span>Ora</span></div>
+            <p class="footer-description">
+              Beyond the Basics: Our Full-Stack Budget Tracker helps you take
+              control of your finances with powerful analytics and intuitive
+              tools.
+            </p>
+          </div>
+          <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="expenses.html">Expenses</a></li>
+              <li><a href="reports.html">Reports</a></li>
+              <li><a href="profile.html">Profile</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Community</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          &copy; 2026 BudgetTracker. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/expenses.js"></script>
+  </body>
+</html>

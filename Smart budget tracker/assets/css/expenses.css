@@ -1,0 +1,145 @@
+/* assets/css/expenses.css */
+
+/* Page Header (Matching style.css hero logic) */
+.page-header {
+  padding: 3rem 0 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(1, 179, 94, 0.1), rgba(39, 55, 168, 0.1));
+  border-radius: 0 0 30px 30px;
+  margin-bottom: 2rem;
+}
+
+.page-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--text-dark); }
+.page-header p { font-size: 1.1rem; color: var(--text-gray); }
+
+/* Filters */
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  align-items: end;
+}
+
+@media (max-width: 768px) {
+  .filters-grid { grid-template-columns: 1fr; }
+  .filters-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
+
+/* --- TABLE RESPONSIVENESS FIX --- */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto; /* Allows horizontal scrolling */
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+}
+
+.transactions-table {
+  width: 100%;
+  min-width: 700px; /* Forces width so text doesn't squash */
+  border-collapse: collapse;
+}
+
+.transactions-table th, 
+.transactions-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.transactions-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.table-summary {
+  display: flex;
+  justify-content: space-around;
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Pagination */
+.table-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.pagination { display: flex; align-items: center; gap: 1rem; }
+
+/* --- Full Width Chart Section --- */
+
+/* 1. Force the card to span the full width of the grid */
+.full-width-chart {
+    grid-column: 1 / -1; /* Spans from start to end of grid */
+    margin-top: 1rem;
+}
+
+/* 2. Horizontal Layout (Side-by-Side) */
+.chart-horizontal-layout {
+    display: flex;
+    align-items: center; /* Vertically center */
+    gap: 2rem; /* Space between chart and details */
+    margin-top: 1rem;
+}
+
+/* 3. Sizing the sides */
+.chart-wrapper {
+    flex: 1; /* Takes up 1 part width */
+    height: 300px;
+    position: relative;
+    min-width: 300px;
+}
+
+.chart-details {
+    flex: 1.5; /* Takes up 1.5 parts width (wider for details) */
+}
+
+/* 4. Adjusting the inner elements for horizontal view */
+.full-width-chart .chart-summary {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 12px;
+    border-top: none; /* Remove old style */
+}
+
+.full-width-chart .categories-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.full-width-chart .category-item {
+    background: white;
+    border: 1px solid #eee;
+    color: #333; /* Make text visible */
+}
+
+/* --- Responsive Mobile Fallback --- */
+@media (max-width: 992px) {
+    /* On tablets/mobile, stack them again */
+    .chart-horizontal-layout {
+        flex-direction: column;
+    }
+    
+    .chart-wrapper {
+        width: 100%;
+        height: 250px;
+    }
+    
+    .chart-details {
+        width: 100%;
+    }
+}

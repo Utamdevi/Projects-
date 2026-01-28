@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mood Tracker - Calendar</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-calendar-alt"></i> Mood Calendar</h1>
+        <p class="tagline">Visualize your mood patterns over time</p>
+      </header>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link"
+          ><i class="fas fa-home"></i> Dashboard</a
+        >
+        <a href="calendar.html" class="nav-link active"
+          ><i class="fas fa-calendar-alt"></i> Calendar</a
+        >
+        <a href="stats.html" class="nav-link"
+          ><i class="fas fa-chart-bar"></i> Statistics</a
+        >
+        <a href="history.html" class="nav-link"
+          ><i class="fas fa-history"></i> History</a
+        >
+      </nav>
+
+      <div class="calendar-controls">
+        <div class="calendar-header">
+          <button id="prevYear" class="month-nav" title="Previous Year">
+            <i class="fas fa-angle-double-left"></i>
+          </button>
+          <button id="prevMonth" class="month-nav" title="Previous Month">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div id="currentMonth" class="current-month"></div>
+          <button id="nextMonth" class="month-nav" title="Next Month">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <button id="nextYear" class="month-nav" title="Next Year">
+            <i class="fas fa-angle-double-right"></i>
+          </button>
+          <button id="todayBtn" class="today-btn">
+            <i class="fas fa-calendar-day"></i> Today
+          </button>
+        </div>
+
+        <div class="view-controls">
+          <div class="view-options">
+            <button id="monthView" class="view-btn active">Month</button>
+            <button id="yearView" class="view-btn">Year</button>
+          </div>
+
+          <div class="legend">
+            <span class="legend-title">Mood Legend:</span>
+            <div class="legend-items">
+              <div class="legend-item">
+                <div class="legend-color mood-happy"></div>
+                <span>Happy</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color mood-sad"></div>
+                <span>Sad</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color mood-neutral"></div>
+                <span>Neutral</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color mood-angry"></div>
+                <span>Angry</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calendar-view">
+        <div id="monthCalendar" class="month-calendar">
+          <!-- Month calendar will be generated here -->
+        </div>
+
+        <div id="yearCalendar" class="year-calendar hidden">
+          <!-- Year calendar will be generated here -->
+        </div>
+      </div>
+
+      <div class="calendar-sidebar">
+        <div class="sidebar-section">
+          <h3><i class="fas fa-info-circle"></i> Selected Day</h3>
+          <div id="selectedDayInfo" class="day-info">
+            <p>Click on a day to see details</p>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h3><i class="fas fa-chart-line"></i> This Month's Stats</h3>
+          <div id="monthStats" class="month-stats">
+            <!-- Month stats will be loaded here -->
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h3><i class="fas fa-lightbulb"></i> Tips</h3>
+          <div class="tips">
+            <p>
+              <i class="fas fa-check-circle"></i> Try to log your mood every day
+              for accurate tracking
+            </p>
+            <p>
+              <i class="fas fa-check-circle"></i> Look for patterns - do certain
+              days of the week affect your mood?
+            </p>
+            <p>
+              <i class="fas fa-check-circle"></i> Use the notes to remember what
+              influenced your mood each day
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          Mood Tracker Journal &copy; 2023 | Your emotions matter. Track them
+          daily for better mental wellbeing.
+        </p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="calendar.js"></script>
+  </body>
+</html>

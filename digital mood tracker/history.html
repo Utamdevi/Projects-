@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mood Tracker - History</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-history"></i> Mood History</h1>
+        <p class="tagline">Browse and manage all your mood entries</p>
+      </header>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link"
+          ><i class="fas fa-home"></i> Dashboard</a
+        >
+        <a href="calendar.html" class="nav-link"
+          ><i class="fas fa-calendar-alt"></i> Calendar</a
+        >
+        <a href="stats.html" class="nav-link"
+          ><i class="fas fa-chart-bar"></i> Statistics</a
+        >
+        <a href="history.html" class="nav-link active"
+          ><i class="fas fa-history"></i> History</a
+        >
+      </nav>
+
+      <div class="history-controls">
+        <div class="search-filter">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search notes..." />
+          </div>
+
+          <div class="filter-options">
+            <select id="moodFilter">
+              <option value="all">All Moods</option>
+              <option value="happy">Happy</option>
+              <option value="sad">Sad</option>
+              <option value="neutral">Neutral</option>
+              <option value="angry">Angry</option>
+            </select>
+
+            <select id="dateFilter">
+              <option value="all">All Time</option>
+              <option value="week">Last 7 Days</option>
+              <option value="month">Last 30 Days</option>
+              <option value="year">Last Year</option>
+            </select>
+
+            <select id="sortFilter">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="history-actions">
+          <button id="exportBtn" class="action-btn">
+            <i class="fas fa-file-export"></i> Export
+          </button>
+          <button id="printBtn" class="action-btn">
+            <i class="fas fa-print"></i> Print
+          </button>
+          <button id="clearAllBtn" class="action-btn danger">
+            <i class="fas fa-trash-alt"></i> Clear All
+          </button>
+        </div>
+      </div>
+
+      <div class="history-stats">
+        <div class="history-stat">
+          <span class="stat-label">Total Entries:</span>
+          <span class="stat-value" id="totalEntriesCount">0</span>
+        </div>
+        <div class="history-stat">
+          <span class="stat-label">Showing:</span>
+          <span class="stat-value" id="showingCount">0</span>
+        </div>
+        <div class="history-stat">
+          <span class="stat-label">Date Range:</span>
+          <span class="stat-value" id="dateRange">-</span>
+        </div>
+      </div>
+
+      <div id="historyContainer" class="history-container">
+        <!-- History entries will be loaded here -->
+      </div>
+
+      <div class="pagination">
+        <button id="prevPage" class="page-btn" disabled>
+          <i class="fas fa-chevron-left"></i> Previous
+        </button>
+        <div class="page-info">
+          Page <span id="currentPage">1</span> of <span id="totalPages">1</span>
+        </div>
+        <button id="nextPage" class="page-btn" disabled>
+          Next <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <footer>
+        <p>
+          Mood Tracker Journal &copy; 2023 | Your emotions matter. Track them
+          daily for better mental wellbeing.
+        </p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="history.js"></script>
+  </body>
+</html>

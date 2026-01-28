@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Budget Tracker | Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/profile.css" />
+</head>
+
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <div class="container header-content">
+      <a href="index.html" class="logo">
+        <i class="fas fa-chart-pie"></i>
+        <div class="logo-text">
+          <span class="logo-part1">Spend</span><span class="logo-part2">ora</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li>
+            <a href="index.html"><i class="fas fa-home"></i> Dashboard</a>
+          </li>
+
+          <li>
+            <a href="expenses.html"><i class="fas fa-exchange-alt"></i> Expenses</a>
+          </li>
+          <li>
+            <a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+          </li>
+          <li>
+            <a href="profile.html" class="active"><i class="fas fa-user"></i> Profile</a>
+          </li>
+        </ul>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1><i class="fas fa-user"></i> My Profile</h1>
+      <p>Manage your account settings and preferences</p>
+    </div>
+  </section>
+
+  <!-- Profile Content -->
+  <main class="container">
+    <div class="profile-container">
+      <!-- Sidebar -->
+      <div class="profile-sidebar">
+        <div class="profile-avatar" id="profileAvatar">JS</div>
+        <h2 class="profile-name" id="profileName">Muskan Qurban</h2>
+        <p class="profile-email" id="profileEmail">musqan.qurban@gmail.com</p>
+
+        <div class="profile-meta">
+          <div class="meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Member since: <strong id="memberSince">Dec 2025</strong></span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Location:
+              <strong id="profileLocation">Hyderabad, Pakistan</strong></span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-phone"></i>
+            <span>Phone:
+              <strong id="profilePhone">+234 812 345 6789</strong></span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="editProfileBtn" style="width: 100%">
+          <i class="fas fa-edit"></i> Edit Profile
+        </button>
+      </div>
+
+      <!-- Main Content -->
+      <div class="profile-content">
+        <!-- Account Settings -->
+        <div class="profile-section">
+          <div class="section-header">
+            <h3><i class="fas fa-user-cog"></i> Account Settings</h3>
+            <button class="btn btn-secondary btn-small" id="saveProfileBtn" style="display: none">
+              <i class="fas fa-save"></i> Save Changes
+            </button>
+          </div>
+
+          <div class="profile-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" class="form-control" id="fullName" value="Muskan Qurban" disabled />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" id="email" value="muskan.qurban@gmail.com" disabled />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" value="+234 812 345 6789" disabled />
+              </div>
+              <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" value="Hyderabad, Pakistan" disabled />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="currency">Default Currency</label>
+                <select class="form-control" id="currency" disabled>
+                  <option value="PKR">Pakistani Rupee (PKR)</option>
+                  <option value="USD">US Dollar ($)</option>
+                  <option value="EUR">Euro (€)</option>
+                  <option value="GBP">British Pound (£)</option>
+                  <option value="JPY">Japanese Yen (¥)</option>
+                  <option value="JPY">Japanese Yen (JPY)</option>
+                  <option value="INR">Indian Rupee (₹)</option>
+                  <option value="NGN">Nigerian Naira (₦)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="monthStart">Month Start Date</label>
+                <select class="form-control" id="monthStart" disabled>
+                  <option value="1">1st of the month</option>
+                  <option value="15">15th of the month</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security -->
+        <div class="profile-section">
+          <h3><i class="fas fa-shield-alt"></i> Security</h3>
+
+          <div class="security-settings">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="currentPassword">Current Password</label>
+                <input type="password" class="form-control" id="currentPassword" placeholder="Enter current password"
+                  disabled />
+              </div>
+              <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <input type="password" class="form-control" id="newPassword" placeholder="Enter new password"
+                  disabled />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirmPassword">Confirm New Password</label>
+              <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password"
+                disabled />
+            </div>
+
+            <div class="password-strength">
+              <div class="strength-label">Password Strength:</div>
+              <div class="strength-bar">
+                <div class="strength-fill" id="passwordStrength"></div>
+              </div>
+              <div class="strength-text" id="passwordStrengthText">
+                Not set
+              </div>
+            </div>
+
+            <button class="btn btn-primary" id="updatePasswordBtn" disabled>
+              <i class="fas fa-key"></i> Update Password
+            </button>
+          </div>
+        </div>
+
+        <!-- Notifications -->
+        <div class="profile-section">
+          <h3><i class="fas fa-bell"></i> Notifications</h3>
+
+          <div class="notification-settings">
+            <div class="notification-item">
+              <div class="notification-info">
+                <div class="notification-title">Email Notifications</div>
+                <div class="notification-description">
+                  Receive email alerts for transactions and reports
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="emailNotifications" checked disabled />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="notification-item">
+              <div class="notification-info">
+                <div class="notification-title">Weekly Spending Report</div>
+                <div class="notification-description">
+                  Get weekly email summaries of your spending
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="weeklyReports" checked disabled />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="notification-item">
+              <div class="notification-info">
+                <div class="notification-title">Budget Limit Alerts</div>
+                <div class="notification-description">
+                  Receive alerts when approaching budget limits
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="budgetAlerts" disabled />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="notification-item">
+              <div class="notification-info">
+                <div class="notification-title">Low Balance Alerts</div>
+                <div class="notification-description">
+                  Get notified when your balance is low
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="balanceAlerts" disabled />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Management -->
+        <div class="profile-section">
+          <h3><i class="fas fa-database"></i> Data Management</h3>
+
+          <div class="data-actions">
+            <div class="action-card">
+              <div class="action-icon export">
+                <i class="fas fa-download"></i>
+              </div>
+              <div class="action-content">
+                <div class="action-title">Export Your Data</div>
+                <div class="action-description">
+                  Download all your transactions as CSV or JSON
+                </div>
+              </div>
+              <button class="btn btn-secondary" onclick="exportUserData()">
+                Export
+              </button>
+            </div>
+
+            <div class="action-card">
+              <div class="action-icon import">
+                <i class="fas fa-upload"></i>
+              </div>
+              <div class="action-content">
+                <div class="action-title">Import Data</div>
+                <div class="action-description">
+                  Upload transactions from other budgeting apps
+                </div>
+              </div>
+              <button class="btn btn-secondary" onclick="importUserData()">
+                Import
+              </button>
+            </div>
+
+            <div class="action-card danger">
+              <div class="action-icon delete">
+                <i class="fas fa-power-off"></i>
+              </div>
+              <div class="action-content">
+                <div class="action-title">Reset Demo Data</div>
+                <div class="action-description">
+                  Clear all storage and restart the application from scratch.
+                </div>
+              </div>
+              <button class="btn btn-danger" id="resetDemoBtn">
+                <i class="fas fa-trash-alt"></i> Reset App
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <div class="footer-logo">Spend<span>Ora</span></div>
+          <p class="footer-description">
+            Beyond the Basics: Our Full-Stack Budget Tracker helps you take
+            control of your finances with powerful analytics and intuitive
+            tools.
+          </p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="expenses.html">Expenses</a></li>
+            <li><a href="reports.html">Reports</a></li>
+            <li><a href="profile.html">Profile</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        &copy; 2026 BudgetTracker. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Files -->
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/profile.js"></script>
+</body>
+
+</html>

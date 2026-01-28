@@ -1,0 +1,212 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: #a0a0c0;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.instruments {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+}
+
+.instrument-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 25px;
+  width: 350px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  border: 2px solid transparent;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.instrument-card:hover {
+  transform: translateY(-15px);
+  border-color: #ff7e5f;
+  box-shadow: 0 25px 50px rgba(255, 126, 95, 0.3);
+}
+
+.instrument-image {
+  height: 65%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.drum-image {
+  background:
+    linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)),
+    url("https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+}
+
+.piano-image {
+  background:
+    linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)),
+    url("https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+}
+
+.instrument-info {
+  padding: 30px;
+  height: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.instrument-info h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #ff7e5f;
+}
+
+.instrument-info p {
+  color: #a0a0c0;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.instrument-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.feature {
+  background: rgba(255, 126, 95, 0.2);
+  color: #ff7e5f;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.btn {
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  color: #1a1a2e;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(255, 126, 95, 0.4);
+}
+
+.instructions {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 30px;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 30px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.instructions h2 {
+  color: #ff7e5f;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.instructions p {
+  margin-bottom: 15px;
+  color: #a0a0c0;
+  line-height: 1.6;
+}
+
+.footer {
+  margin-top: 50px;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  padding: 20px;
+}
+
+.heart-icon {
+  color: #ff7e5f;
+}
+
+@media (max-width: 768px) {
+  .instruments {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .instrument-card {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+}

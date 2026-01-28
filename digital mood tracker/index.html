@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mood Tracker - Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-smile-beam"></i> Mood Tracker Journal</h1>
+        <p class="tagline">
+          Track your emotions, understand your patterns, improve your wellbeing
+        </p>
+      </header>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link active"
+          ><i class="fas fa-home"></i> Dashboard</a
+        >
+        <a href="calendar.html" class="nav-link"
+          ><i class="fas fa-calendar-alt"></i> Calendar</a
+        >
+        <a href="stats.html" class="nav-link"
+          ><i class="fas fa-chart-bar"></i> Statistics</a
+        >
+        <a href="history.html" class="nav-link"
+          ><i class="fas fa-history"></i> History</a
+        >
+      </nav>
+
+      <div class="summary-card">
+        <h2 class="summary-title">
+          <i class="fas fa-chart-bar"></i> Your Mood Summary
+        </h2>
+        <div id="summaryText" class="summary-text">
+          Loading your mood summary...
+        </div>
+        <div class="stats-container">
+          <div class="stat-item">
+            <div class="stat-emoji">😊</div>
+            <div class="stat-count" id="happyCount">0</div>
+            <div>Happy</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-emoji">😢</div>
+            <div class="stat-count" id="sadCount">0</div>
+            <div>Sad</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-emoji">😐</div>
+            <div class="stat-count" id="neutralCount">0</div>
+            <div>Neutral</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-emoji">😠</div>
+            <div class="stat-count" id="angryCount">0</div>
+            <div>Angry</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-container">
+        <div class="entry-card">
+          <h2 class="card-title">
+            <i class="fas fa-edit"></i> Today's Check-in
+          </h2>
+          <div id="dateDisplay" class="date-display"></div>
+
+          <div class="emoji-selector">
+            <div class="emoji-option" data-mood="happy">
+              <div class="emoji">😊</div>
+              <div class="emoji-label">Happy</div>
+            </div>
+            <div class="emoji-option" data-mood="sad">
+              <div class="emoji">😢</div>
+              <div class="emoji-label">Sad</div>
+            </div>
+            <div class="emoji-option" data-mood="neutral">
+              <div class="emoji">😐</div>
+              <div class="emoji-label">Neutral</div>
+            </div>
+            <div class="emoji-option" data-mood="angry">
+              <div class="emoji">😠</div>
+              <div class="emoji-label">Angry</div>
+            </div>
+          </div>
+
+          <div class="note-section">
+            <label for="noteInput"
+              ><i class="fas fa-sticky-note"></i> Add a note about your day
+              (optional):</label
+            >
+            <textarea
+              id="noteInput"
+              placeholder="How are you feeling today? What's on your mind?"
+            ></textarea>
+          </div>
+
+          <button id="saveBtn" class="save-btn">
+            <i class="fas fa-save"></i> Save Today's Mood
+          </button>
+        </div>
+
+        <div class="quick-links">
+          <h2><i class="fas fa-rocket"></i> Quick Access</h2>
+          <div class="links-grid">
+            <a href="calendar.html" class="quick-link">
+              <div class="quick-icon">
+                <i class="fas fa-calendar-day"></i>
+              </div>
+              <h3>Calendar View</h3>
+              <p>See your mood patterns on a monthly calendar</p>
+            </a>
+            <a href="stats.html" class="quick-link">
+              <div class="quick-icon">
+                <i class="fas fa-chart-pie"></i>
+              </div>
+              <h3>Statistics</h3>
+              <p>View detailed charts and insights about your moods</p>
+            </a>
+            <a href="history.html" class="quick-link">
+              <div class="quick-icon">
+                <i class="fas fa-list-alt"></i>
+              </div>
+              <h3>History</h3>
+              <p>Browse all your past mood entries</p>
+            </a>
+            <div class="quick-link" id="exportData">
+              <div class="quick-icon">
+                <i class="fas fa-file-export"></i>
+              </div>
+              <h3>Export Data</h3>
+              <p>Download your mood history as a file</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="recent-entries">
+        <h2><i class="fas fa-clock"></i> Recent Entries</h2>
+        <div id="recentEntriesList" class="entries-list">
+          <!-- Recent entries will be loaded here -->
+        </div>
+        <div class="view-all">
+          <a href="history.html"
+            >View All Entries <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          Mood Tracker Journal &copy; 2023 | Your emotions matter. Track them
+          daily for better mental wellbeing.
+        </p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Initialize dashboard
+      document.addEventListener("DOMContentLoaded", function () {
+        // Load saved data from localStorage
+        loadMoodData();
+
+        // Set up event listeners
+        setupEventListeners();
+
+        // Initialize the UI
+        updateDateDisplay();
+        updateSummary();
+        renderRecentEntries();
+        selectTodaysMood();
+
+        // Set up navigation
+        setupNavigation();
+
+        // Export data functionality
+        document
+          .getElementById("exportData")
+          .addEventListener("click", exportData);
+      });
+
+      function renderRecentEntries() {
+        const container = document.getElementById("recentEntriesList");
+
+        // Get all entries sorted by date (newest first)
+        const entries = Object.values(moodData)
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .slice(0, 5); // Show only the 5 most recent entries
+
+        if (entries.length === 0) {
+          container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>No entries yet</h3>
+                        <p>Start by logging your mood today!</p>
+                    </div>
+                `;
+          return;
+        }
+
+        let html = "";
+
+        entries.forEach((entry) => {
+          // Format the date
+          const dateObj = new Date(entry.date);
+          const formattedDate = dateObj.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          });
+
+          // Mood emoji mapping
+          const moodEmoji = {
+            happy: "😊",
+            sad: "😢",
+            neutral: "😐",
+            angry: "😠",
+          };
+
+          // Mood color classes
+          const moodColorClass = `mood-${entry.mood}`;
+
+          html += `
+                <div class="entry-item">
+                    <div class="entry-date">${formattedDate}</div>
+                    <div class="entry-mood ${moodColorClass}">${moodEmoji[entry.mood]}</div>
+                    <div class="entry-note">${entry.note || "No note"}</div>
+                </div>
+                `;
+        });
+
+        container.innerHTML = html;
+      }
+
+      function exportData() {
+        if (Object.keys(moodData).length === 0) {
+          alert("No data to export yet. Start by logging your moods!");
+          return;
+        }
+
+        // Convert mood data to CSV format
+        let csvContent = "Date,Mood,Note\n";
+
+        Object.values(moodData)
+          .sort((a, b) => new Date(a.date) - new Date(b.date))
+          .forEach((entry) => {
+            const row = [
+              entry.date,
+              entry.mood.charAt(0).toUpperCase() + entry.mood.slice(1),
+              `"${(entry.note || "").replace(/"/g, '""')}"`,
+            ];
+            csvContent += row.join(",") + "\n";
+          });
+
+        // Create a download link
+        const blob = new Blob([csvContent], {
+          type: "text/csv;charset=utf-8;",
+        });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.setAttribute("href", url);
+        link.setAttribute("download", "mood-tracker-data.csv");
+        link.style.visibility = "hidden";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        alert("Your data has been exported as a CSV file!");
+      }
+    </script>
+  </body>
+</html>

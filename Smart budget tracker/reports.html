@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Budget Tracker | Reports</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/reports.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  </head>
+  <body>
+    <!-- Header & Navigation -->
+    <header>
+      <div class="container header-content">
+        <a href="index.html" class="logo">
+          <i class="fas fa-chart-pie"></i>
+          <div class="logo-text">
+            <span class="logo-part1">Spend</span
+            ><span class="logo-part2">ora</span>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links" id="navLinks">
+            <li>
+              <a href="index.html"><i class="fas fa-home"></i> Dashboard</a>
+            </li>
+
+            <li>
+              <a href="expenses.html"
+                ><i class="fas fa-exchange-alt"></i> Expenses</a
+              >
+            </li>
+            <li>
+              <a href="reports.html" class="active"
+                ><i class="fas fa-chart-bar"></i> Reports</a
+              >
+            </li>
+            <li>
+              <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+            </li>
+          </ul>
+
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1><i class="fas fa-chart-bar"></i> Financial Reports</h1>
+        <p>Analyze your spending patterns and financial health</p>
+      </div>
+    </section>
+
+    <!-- Reports Content -->
+    <main class="container">
+      <!-- Date Range Selector -->
+      <div class="card">
+        <div class="date-range-selector">
+          <div>
+            <h2><i class="fas fa-calendar-alt"></i> Select Report Period</h2>
+            <p>Choose the time period for your financial analysis</p>
+          </div>
+
+          <div class="date-controls">
+            <select
+              class="form-control"
+              id="reportPeriod"
+              style="color: white; background-color: #27ae60"
+            >
+              <option value="current-month">Current Month</option>
+              <option value="last-month">Last Month</option>
+              <option value="last-3-months">Last 3 Months</option>
+              <option value="last-6-months">Last 6 Months</option>
+              <option value="current-year">Current Year</option>
+              <option value="last-year">Last Year</option>
+              <option value="custom">Custom Range</option>
+            </select>
+
+            <div class="custom-dates" id="customDates" style="display: none">
+              <input type="date" class="form-control" id="startDate" />
+              <span>to</span>
+              <input type="date" class="form-control" id="endDate" />
+            </div>
+
+            <button class="btn btn-primary" id="generateReportBtn">
+              <i class="fas fa-sync-alt"></i> Generate Report
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financial Overview -->
+      <div class="reports-grid">
+        <!-- Income vs Expenses Card -->
+        <div class="report-card large">
+          <div class="report-card-header">
+            <h3><i class="fas fa-balance-scale"></i> Income vs Expenses</h3>
+            <div class="report-period" id="incomeExpensesPeriod">
+              Current Month
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas id="incomeExpensesChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Monthly Trends Card -->
+        <div class="report-card">
+          <div class="report-card-header">
+            <h3><i class="fas fa-chart-line"></i> Monthly Trends</h3>
+            <div class="report-actions">
+              <select class="form-control-sm" id="trendType">
+                <option value="income">Income</option>
+                <option value="expenses">Expenses</option>
+                <option value="balance">Balance</option>
+              </select>
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas id="trendChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Budget Performance Card -->
+        <div class="report-card">
+          <div class="report-card-header">
+            <h3><i class="fas fa-bullseye"></i> Budget Performance</h3>
+            <div class="report-performance" id="budgetPerformance">85%</div>
+          </div>
+          <div class="performance-grid">
+            <div class="performance-item">
+              <div class="performance-label">Budget Used</div>
+              <div class="performance-value" id="budgetUsed">75%</div>
+              <div class="performance-bar">
+                <div class="performance-fill" style="width: 75%"></div>
+              </div>
+            </div>
+            <div class="performance-item">
+              <div class="performance-label">Savings Rate</div>
+              <div class="performance-value success" id="savingsRate">25%</div>
+              <div class="performance-bar">
+                <div class="performance-fill success" style="width: 25%"></div>
+              </div>
+            </div>
+            <div class="performance-item">
+              <div class="performance-label">Overspent Categories</div>
+              <div class="performance-value danger" id="overspentCategories">
+                1
+              </div>
+              <div class="performance-bar">
+                <div class="performance-fill danger" style="width: 10%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Metrics -->
+      <div class="card">
+        <h2><i class="fas fa-chart-line"></i> Key Financial Metrics</h2>
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon primary">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <div class="metric-content">
+              <div class="metric-label">Average Monthly Income</div>
+              <div class="metric-value" id="avgMonthlyIncome">N250,000</div>
+              <div class="metric-change positive">+12% from last month</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon warning">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="metric-content">
+              <div class="metric-label">Average Monthly Expenses</div>
+              <div class="metric-value" id="avgMonthlyExpenses">N187,500</div>
+              <div class="metric-change negative">-5% from last month</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon success">
+              <i class="fas fa-piggy-bank"></i>
+            </div>
+            <div class="metric-content">
+              <div class="metric-label">Monthly Savings</div>
+              <div class="metric-value" id="monthlySavings">N62,500</div>
+              <div class="metric-change positive">+25% savings rate</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon info">
+              <i class="fas fa-tags"></i>
+            </div>
+            <div class="metric-content">
+              <div class="metric-label">Top Spending Category</div>
+              <div class="metric-value" id="topCategory">Entertainment</div>
+              <div class="metric-change">32% of total expenses</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financial Insights -->
+      <div class="card">
+        <div class="insights-header">
+          <h2><i class="fas fa-lightbulb"></i> Financial Insights</h2>
+          <button
+            class="btn btn-secondary"
+            id="refreshInsightsBtn"
+            style="background-color: #27ae60; color: white"
+          >
+            <i class="fas fa-sync-alt"></i> Refresh Insights
+          </button>
+        </div>
+
+        <div class="insights-grid" id="insightsGrid">
+          <!-- Insights will be loaded here -->
+        </div>
+      </div>
+
+      <!-- Export Reports -->
+      <div class="card">
+        <h2><i class="fas fa-download"></i> Export Reports</h2>
+        <div class="export-options">
+          <button class="btn btn-primary" onclick="exportReport('pdf')">
+            <i class="fas fa-file-pdf"></i> Export as PDF
+          </button>
+          <button class="btn btn-success" onclick="exportReport('csv')">
+            <i class="fas fa-file-csv"></i> Export as CSV
+          </button>
+          <button class="btn btn-info" onclick="exportReport('print')">
+            <i class="fas fa-print"></i> Print Report
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-info">
+            <div class="footer-logo">Spend<span>Ora</span></div>
+            <p class="footer-description">
+              Beyond the Basics: Our Full-Stack Budget Tracker helps you take
+              control of your finances with powerful analytics and intuitive
+              tools.
+            </p>
+          </div>
+          <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="expenses.html">Expenses</a></li>
+
+              <li><a href="reports.html">Reports</a></li>
+              <li><a href="profile.html">Profile</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Community</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          &copy; 2026 BudgetTracker. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/reports.js"></script>
+  </body>
+</html>
